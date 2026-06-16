@@ -1,2 +1,81 @@
-skills/
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+*.tsbuildinfo
+next-env.d.ts
+
+# Misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local env files
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+
+# Database
+*.db
+*.db-journal
+db/*.db
+
+# Logs
+dev.log
+*.log
+server.log
+
+# Z scripts internal (sandbox only)
+.zscripts/
+
+# Caddyfile (local gateway sandbox only)
+Caddyfile
+
+# Skills internal (skill files, not part of site)
+skills/
+
+# Examples / mini-services (scaffold demos, not needed)
+examples/
+mini-services/
+
+# Screenshots
+scripts/*.png
+scripts/*.jpg
+scripts/*.webm
+
+# User uploads (source files, not part of site)
+upload/

@@ -62,6 +62,27 @@ export function About() {
               </p>
             </motion.div>
 
+            {/* Photo du formateur en session */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative rounded-2xl overflow-hidden shadow-card border border-navy/8"
+            >
+              { }
+              <img
+                src="/formateur.jpg"
+                alt="Formateur VISION 2000 ELC animant une session de formation"
+                className="w-full h-64 sm:h-80 object-cover"
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-deep/80 to-transparent p-4">
+                <p className="text-cream text-sm font-medium">
+                  Session de formation Business English à Ouagadougou
+                </p>
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

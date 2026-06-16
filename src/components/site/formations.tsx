@@ -120,6 +120,37 @@ export function Formations() {
           intro="Que vous prépariez le TOEIC, visiez une promotion internationale ou souhaitiez simplement voyager, nos programmes progressifs vous mènent du niveau débutant au niveau avancé — avec un suivi pédagogique personnalisé et des formateurs expérimentés."
         />
 
+        {/* Photo de groupe de formation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 relative rounded-2xl overflow-hidden shadow-card border border-navy/8"
+        >
+          { }
+          <img
+            src="/groupe-formation.jpg"
+            alt="Groupe d'apprenants VISION 2000 ELC lors d'une formation"
+            className="w-full h-56 sm:h-72 lg:h-80 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/60 to-transparent" />
+          <div className="absolute inset-0 flex items-center">
+            <div className="p-6 sm:p-10 max-w-lg">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange text-white text-xs font-bold uppercase tracking-widest mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                Formation en groupe
+              </div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-cream mb-2">
+                Des classes à taille humaine
+              </h3>
+              <p className="text-cream/85 text-sm sm:text-base">
+                8 à 12 apprenants maximum pour garantir un suivi personnalisé et des progrès rapides.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         <Tabs value={tab} onValueChange={setTab} className="mt-14">
           <div className="flex justify-center mb-10">
             <TabsList className="bg-white shadow-soft p-1.5 h-auto flex-wrap">

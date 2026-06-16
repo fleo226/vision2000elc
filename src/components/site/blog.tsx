@@ -16,6 +16,7 @@ const ARTICLES = [
     date: "12 juin 2026",
     readTime: "5 min",
     color: "orange",
+    image: "/blog-1.jpg",
   },
   {
     category: "Certifications",
@@ -24,6 +25,7 @@ const ARTICLES = [
     date: "5 juin 2026",
     readTime: "7 min",
     color: "emerald",
+    image: "/blog-2.jpg",
   },
   {
     category: "Conseils",
@@ -32,6 +34,7 @@ const ARTICLES = [
     date: "28 mai 2026",
     readTime: "4 min",
     color: "navy",
+    image: "/blog-3.jpg",
   },
   {
     category: "Professionnel",
@@ -40,6 +43,7 @@ const ARTICLES = [
     date: "20 mai 2026",
     readTime: "8 min",
     color: "crimson",
+    image: "/blog-4.jpg",
   },
   {
     category: "Métiers",
@@ -48,6 +52,7 @@ const ARTICLES = [
     date: "10 mai 2026",
     readTime: "6 min",
     color: "gold",
+    image: "/blog-5.jpg",
   },
 ]
 
@@ -81,9 +86,14 @@ export function Blog() {
             className="lg:col-span-2 lg:row-span-2"
           >
             <Card className="group h-full overflow-hidden bg-white shadow-soft hover:shadow-card transition-all border-navy/8">
-              <div className={`h-56 sm:h-72 relative ${colorMap[featured.color].split(" ")[0]} flex items-center justify-center overflow-hidden`}>
-                <div className="absolute inset-0 pattern-grid opacity-30" />
-                <BookOpen className={`w-24 h-24 ${colorMap[featured.color].split(" ")[1]} opacity-30`} />
+              <div className="h-56 sm:h-72 relative overflow-hidden bg-navy/5">
+                { }
+                <img
+                  src={featured.image}
+                  alt={featured.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/40 to-transparent" />
                 <Badge className={`absolute top-4 left-4 ${colorMap[featured.color]} border-0 font-semibold`}>
                   À la une
                 </Badge>
@@ -119,6 +129,14 @@ export function Blog() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
               <Card className="group h-full bg-white shadow-soft hover:shadow-card transition-all border-navy/8 overflow-hidden">
+                <div className="h-40 sm:h-44 relative overflow-hidden bg-navy/5">
+                  { }
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Badge className={`${colorMap[article.color]} border-0 font-semibold`}>{article.category}</Badge>

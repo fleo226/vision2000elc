@@ -127,7 +127,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Colonne droite - Carte de preuve */}
+          {/* Colonne droite - Photo du formateur + carte de preuve */}
           <div className="lg:col-span-5">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -135,44 +135,29 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="relative"
             >
-              {/* Carte principale */}
-              <div className="relative bg-white rounded-3xl p-7 shadow-card border border-navy/8">
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <div className="text-xs uppercase tracking-widest text-orange font-bold mb-1">
-                      Notoriété
-                    </div>
-                    <div className="text-4xl font-display font-extrabold text-navy">20+ ans</div>
-                    <div className="text-sm text-navy-soft/70">d'expertise linguistique</div>
-                  </div>
-                  { }
-                  <img src="/logo.jpeg" alt="VISION 2000 ELC" className="w-16 h-16 rounded-2xl object-cover ring-2 ring-orange/30" />
-                </div>
+              {/* Photo principale du formateur en session */}
+              <div className="relative rounded-3xl overflow-hidden shadow-card border border-navy/8">
+                { }
+                <img
+                  src="/formateur.jpg"
+                  alt="Formateur VISION 2000 ELC en session de formation à Ouagadougou"
+                  className="w-full h-[420px] sm:h-[500px] object-cover"
+                />
+                {/* Overlay dégradé en bas */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/85 via-navy-deep/10 to-transparent" />
 
-                <div className="grid grid-cols-2 gap-3">
-                  <Stat label="Mots traduits" value="1M+" tone="orange" />
-                  <Stat label="Pros formés" value="Centaines" tone="emerald" />
-                  <Stat label="Conférences" value="Internat." tone="gold" />
-                  <Stat label="Clients" value="ONG · États" tone="navy" />
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-navy/8">
-                  <div className="flex items-center gap-3">
-                    <div className="flex -space-x-2">
-                      {[
-                        "bg-orange",
-                        "bg-emerald",
-                        "bg-crimson",
-                        "bg-gold",
-                      ].map((c, i) => (
-                        <div key={i} className={`w-9 h-9 rounded-full ${c} ring-2 ring-white flex items-center justify-center text-white font-bold text-xs`}>
-                          {["ON", "BN", "M", "I"][i]}
-                        </div>
-                      ))}
+                {/* Carte notoriété en bas de la photo */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="glass-light rounded-xl p-3 flex items-center gap-3">
+                    { }
+                    <img src="/logo.jpeg" alt="VISION 2000 ELC" className="w-10 h-10 rounded-lg object-cover ring-1 ring-orange/30 shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="font-display font-bold text-navy text-sm">VISION 2000 ELC</div>
+                      <div className="text-[11px] text-navy-soft/70 truncate">+20 ans d'expertise humaine à Ouagadougou</div>
                     </div>
-                    <div className="text-sm">
-                      <div className="font-semibold text-navy">Ils nous font confiance</div>
-                      <div className="text-navy-soft/60 text-xs">ONG, banques, ministères, entreprises</div>
+                    <div className="text-right shrink-0">
+                      <div className="font-display font-extrabold text-orange text-lg leading-none">20+</div>
+                      <div className="text-[10px] text-navy-soft/70 uppercase tracking-wider">ans</div>
                     </div>
                   </div>
                 </div>
@@ -182,7 +167,7 @@ export function Hero() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-5 -right-3 sm:-right-5 bg-emerald text-white text-xs font-bold px-3 py-2 rounded-full shadow-glow-emerald flex items-center gap-1.5"
+                className="absolute -top-4 -right-3 sm:-right-5 bg-emerald text-white text-xs font-bold px-3 py-2 rounded-full shadow-glow-emerald flex items-center gap-1.5 z-10"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
                 100% Humain
@@ -191,7 +176,7 @@ export function Hero() {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-4 -left-3 sm:-left-5 bg-orange text-white text-xs font-bold px-3 py-2 rounded-full shadow-glow-orange flex items-center gap-1.5"
+                className="absolute -bottom-4 -left-3 sm:-left-5 bg-orange text-white text-xs font-bold px-3 py-2 rounded-full shadow-glow-orange flex items-center gap-1.5 z-10"
               >
                 <Clock className="w-3.5 h-3.5" />
                 Express 24h
@@ -201,20 +186,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
-}
-
-function Stat({ label, value, tone }: { label: string; value: string; tone: "orange" | "emerald" | "gold" | "navy" }) {
-  const toneClasses = {
-    orange: "text-orange",
-    emerald: "text-emerald",
-    gold: "text-gold",
-    navy: "text-navy",
-  }
-  return (
-    <div className="rounded-xl bg-cream-warm/60 border border-navy/5 p-3">
-      <div className={`text-lg font-display font-bold ${toneClasses[tone]}`}>{value}</div>
-      <div className="text-[11px] text-navy-soft/70 leading-tight">{label}</div>
-    </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Upload, FileText, Clock, Shield, CheckCircle2, AlertTriangle, ArrowRight, Zap } from "lucide-react"
+import { Upload, FileText, Clock, Shield, ShieldCheck, CheckCircle2, AlertTriangle, ArrowRight, Zap } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -71,6 +71,36 @@ export function Translation() {
           title={<>Traduisez vos documents <span className="gradient-text-orange">en quelques clics</span></>}
           intro="Un service 100% en ligne, rapide, sécurisé et accessible partout dans le monde. Téléchargez vos documents, recevez un devis gratuit sous 2h, et obtenez une traduction professionnelle révisée par nos linguistes."
         />
+
+        {/* Photo de traduction au travail */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 relative rounded-2xl overflow-hidden shadow-card border border-navy/8"
+        >
+          { }
+          <img
+            src="/traduction-documents.jpg"
+            alt="Documents et matériel de traduction professionnelle VISION 2000 ELC"
+            className="w-full h-56 sm:h-72 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 to-transparent" />
+          <div className="absolute inset-0 flex items-center">
+            <div className="p-6 sm:p-10 max-w-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald text-white text-xs font-bold uppercase tracking-widest mb-3">
+                <ShieldCheck className="w-3 h-3" /> Confidentialité garantie
+              </div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-cream mb-2">
+                Chaque document traité avec rigueur
+              </h3>
+              <p className="text-cream/85 text-sm sm:text-base">
+                Contrats, rapports, documents juridiques : la précision est notre signature depuis 20 ans.
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Process en 3 étapes */}
         <div className="grid md:grid-cols-3 gap-5 mt-14">

@@ -54,6 +54,36 @@ export function Interpretation() {
           intro="L'interprétation de conférence est un art qui exige des professionnels certifiés, une concentration extrême et une maîtrise parfaite des deux langues. Nos interprètes ont accompagné des sommets ministériels, des conférences internationales et des missions diplomatiques au Burkina Faso et dans la sous-région."
         />
 
+        {/* Photo du matériel d'interprétation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 relative rounded-2xl overflow-hidden shadow-card border border-navy/8"
+        >
+          { }
+          <img
+            src="/interpretation-materiel.jpg"
+            alt="Matériel d'interprétation de conférence professionnel VISION 2000 ELC"
+            className="w-full h-56 sm:h-72 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 to-transparent" />
+          <div className="absolute inset-0 flex items-center">
+            <div className="p-6 sm:p-10 max-w-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange text-white text-xs font-bold uppercase tracking-widest mb-3">
+                <Mic className="w-3 h-3" /> Matériel professionnel inclus
+              </div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-cream mb-2">
+                Cabines, casques et coordination
+              </h3>
+              <p className="text-cream/85 text-sm sm:text-base">
+                Nous fournissons le matériel technique complet et la logistique pour vos événements.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Modes */}
         <div className="grid md:grid-cols-2 gap-6 mt-14">
           {MODES.map((m, i) => {

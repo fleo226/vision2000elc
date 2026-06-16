@@ -59,13 +59,13 @@ export const metadata: Metadata = {
     siteName: "VISION 2000 ELC",
     locale: "fr_BF",
     type: "website",
-    images: [{ url: "/logo.jpeg", width: 500, height: 500, alt: "VISION 2000 ELC" }],
+    images: [{ url: "/og-banner.jpg", width: 1200, height: 630, alt: "VISION 2000 ELC — Formation Anglais, Traduction & Interprétation" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "VISION 2000 ELC — Formation Anglais, Traduction & Interprétation",
     description: "20+ ans d'expertise humaine à Ouagadougou. Confidentialité garantie.",
-    images: ["/logo.jpeg"],
+    images: ["/og-banner.jpg"],
   },
   robots: {
     index: true,

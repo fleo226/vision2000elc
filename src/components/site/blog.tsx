@@ -100,7 +100,7 @@ export function Blog() {
                 </h3>
                 <p className="text-navy-soft/80 leading-relaxed mb-5">{featured.excerpt}</p>
                 <Button asChild variant="ghost" className="px-0 hover:bg-transparent text-orange hover:text-orange font-semibold">
-                  <Link href="#blog">
+                  <Link href="/blog">
                     Lire l'article
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -139,7 +139,7 @@ export function Blog() {
 
         <div className="text-center mt-10">
           <Button asChild variant="outline" size="lg" className="border-navy/15 text-navy hover:bg-navy hover:text-cream font-semibold h-12 px-7">
-            <Link href="#blog">
+            <Link href="/blog">
               Voir tous les articles
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>

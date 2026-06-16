@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, Globe, MessageCircle, Clock, Send, Loader2 } from "lucide-react"
+import { MapPin, Phone, Mail, MessageCircle, Clock, Send, Loader2 } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -49,14 +49,13 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-20 lg:py-28 gradient-navy text-cream overflow-hidden">
-      <div className="absolute inset-0 pattern-grid opacity-30" />
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-orange/15 rounded-full blur-3xl animate-blob" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
+    <section id="contact" className="relative py-20 lg:py-28 bg-cream overflow-hidden">
+      <div className="absolute inset-0 pattern-dots opacity-50" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-orange/8 rounded-full blur-3xl animate-blob" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald/8 rounded-full blur-3xl animate-blob animation-delay-2000" />
 
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          light
           eyebrow="Contact"
           title={<>Parlons de votre <span className="gradient-text-orange">projet linguistique</span></>}
           intro="Une traduction à faire ? Une formation à organiser ? Un événement à interpréter ? Écrivez-nous, appelez-nous ou passez nous voir à Koulouba. La première consultation est toujours gratuite."
@@ -74,14 +73,14 @@ export function Contact() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="glass rounded-2xl p-5 hover:bg-cream/10 transition-colors h-full"
+                    className="bg-white rounded-2xl p-5 border border-navy/8 shadow-soft hover:shadow-card hover:border-orange/30 transition-all h-full"
                   >
-                    <div className="w-11 h-11 rounded-xl bg-orange/15 text-orange flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-12 h-12 rounded-xl bg-orange/10 text-orange flex items-center justify-center mb-3">
+                      <Icon className="w-6 h-6" />
                     </div>
-                    <div className="text-xs uppercase tracking-widest text-cream/55 font-semibold mb-1">{c.label}</div>
-                    <div className="font-display font-bold text-cream text-sm sm:text-base break-words">{c.value}</div>
-                    <div className="text-xs text-cream/60 mt-1">{c.sub}</div>
+                    <div className="text-xs uppercase tracking-widest text-orange font-bold mb-1">{c.label}</div>
+                    <div className="font-display font-bold text-navy text-sm sm:text-base break-words">{c.value}</div>
+                    <div className="text-xs text-navy-soft/70 mt-1">{c.sub}</div>
                   </motion.div>
                 )
                 return c.href ? (
@@ -100,18 +99,18 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="glass rounded-2xl p-6"
+              className="bg-emerald/5 rounded-2xl p-6 border border-emerald/20"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full bg-emerald flex items-center justify-center animate-pulse-ring">
                   <MessageCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-bold text-cream">Discutons sur WhatsApp</h3>
-                  <p className="text-xs text-cream/65">Réponse en quelques minutes pendant les heures ouvrables</p>
+                  <h3 className="font-display text-lg font-bold text-navy">Discutons sur WhatsApp</h3>
+                  <p className="text-xs text-navy-soft/70">Réponse en quelques minutes pendant les heures ouvrables</p>
                 </div>
               </div>
-              <Button asChild className="w-full bg-emerald hover:bg-emerald/90 text-white font-bold h-12 shadow-lg">
+              <Button asChild className="w-full bg-emerald hover:bg-emerald/90 text-white font-bold h-12 shadow-glow-emerald">
                 <a href="https://wa.me/22670462670" target="_blank" rel="noreferrer">
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Ouvrir WhatsApp
@@ -125,22 +124,22 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="glass rounded-2xl p-6"
+              className="bg-white rounded-2xl p-6 border border-navy/8 shadow-soft"
             >
               <div className="flex items-center gap-2 mb-3">
                 <Clock className="w-5 h-5 text-orange" />
-                <h3 className="font-display font-bold text-cream">Horaires d'ouverture</h3>
+                <h3 className="font-display font-bold text-navy">Horaires d'ouverture</h3>
               </div>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between text-cream/80">
+                <div className="flex justify-between text-navy-soft">
                   <span>Lundi - Vendredi</span>
-                  <span className="font-semibold">8h00 - 18h00</span>
+                  <span className="font-semibold text-navy">8h00 - 18h00</span>
                 </div>
-                <div className="flex justify-between text-cream/80">
+                <div className="flex justify-between text-navy-soft">
                   <span>Samedi</span>
-                  <span className="font-semibold">9h00 - 13h00</span>
+                  <span className="font-semibold text-navy">9h00 - 13h00</span>
                 </div>
-                <div className="flex justify-between text-cream/60">
+                <div className="flex justify-between text-navy-soft/60">
                   <span>Dimanche</span>
                   <span className="font-semibold">Fermé</span>
                 </div>

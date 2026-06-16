@@ -9,28 +9,28 @@ const NAV_SECTIONS = [
   {
     title: "Services",
     links: [
-      { label: "Formation en anglais", href: "#formations" },
-      { label: "Traduction professionnelle", href: "#traduction" },
-      { label: "Interprétation", href: "#interpretation" },
-      { label: "Coaching linguistique", href: "#contact" },
+      { label: "Formation en anglais", href: "/formations" },
+      { label: "Traduction professionnelle", href: "/traduction" },
+      { label: "Interprétation", href: "/interpretation" },
+      { label: "Coaching linguistique", href: "/services" },
     ],
   },
   {
     title: "Centre",
     links: [
-      { label: "À propos", href: "#realisations" },
-      { label: "Pourquoi Humain vs IA", href: "#pourquoi-humain" },
-      { label: "Témoignages", href: "#temoignages" },
-      { label: "Blog & conseils", href: "#blog" },
+      { label: "À propos", href: "/a-propos" },
+      { label: "Pourquoi Humain vs IA", href: "/pourquoi-humain" },
+      { label: "Témoignages", href: "/temoignages" },
+      { label: "Blog & conseils", href: "/blog" },
     ],
   },
   {
     title: "Contact",
     links: [
-      { label: "Demander un devis", href: "#contact" },
-      { label: "S'inscrire à une formation", href: "#formations" },
-      { label: "Réserver un interprète", href: "#interpretation" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Demander un devis", href: "/contact" },
+      { label: "S'inscrire à une formation", href: "/formations" },
+      { label: "Réserver un interprète", href: "/interpretation" },
+      { label: "FAQ", href: "/pourquoi-humain" },
     ],
   },
 ]

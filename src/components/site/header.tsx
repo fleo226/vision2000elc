@@ -2,25 +2,27 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X, Phone, Globe2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const NAV_LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#pourquoi-humain", label: "Pourquoi Humain" },
-  { href: "#formations", label: "Formations" },
-  { href: "#traduction", label: "Traduction" },
-  { href: "#interpretation", label: "Interprétation" },
-  { href: "#realisations", label: "Réalisations" },
-  { href: "#temoignages", label: "Témoignages" },
-  { href: "#blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/pourquoi-humain", label: "Pourquoi Humain" },
+  { href: "/formations", label: "Formations" },
+  { href: "/traduction", label: "Traduction" },
+  { href: "/interpretation", label: "Interprétation" },
+  { href: "/a-propos", label: "À propos" },
+  { href: "/temoignages", label: "Témoignages" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
 ]
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -34,24 +36,40 @@ export function SiteHeader() {
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
+  // Réinitialiser l'état du menu mobile lors du changement de page
+  // (géré via l'event click des liens plutôt que via useEffect pour éviter les re-renders)
+  const handleNavClick = () => {
+    setMobileOpen(false)
+  }
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/"
+    return pathname === href || pathname.startsWith(href + "/")
+  }
+
   return (
     <>
       <header
         className={cn(
           "fixed top-0 inset-x-0 z-50 transition-all duration-300",
-          scrolled ? "bg-cream/95 backdrop-blur-md shadow-soft py-2" : "bg-transparent py-4"
+          scrolled || pathname !== "/"
+            ? "bg-white/95 backdrop-blur-md shadow-soft py-2"
+            : "bg-transparent py-4"
         )}
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Logo + Nom */}
-            <Link href="#accueil" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden ring-2 ring-orange/30 group-hover:ring-orange/60 transition-all">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden ring-2 ring-orange/30 group-hover:ring-orange/60 transition-all shrink-0">
                 { }
                 <img src="/logo.jpeg" alt="VISION 2000 ELC" className="w-full h-full object-cover" />
               </div>
               <div className="hidden sm:flex flex-col leading-none">
-                <span className="font-display font-extrabold text-navy text-lg tracking-tight">
+                <span className={cn(
+                  "font-display font-extrabold text-lg tracking-tight transition-colors",
+                  scrolled || pathname !== "/" ? "text-navy" : "text-navy"
+                )}>
                   VISION <span className="text-crimson">2000</span> ELC
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.18em] text-navy-soft/70 font-semibold mt-0.5">
@@ -66,7 +84,12 @@ export function SiteHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-3 py-2 text-sm font-medium text-navy-soft hover:text-orange transition-colors rounded-md hover:bg-cream-warm"
+                  className={cn(
+                    "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                    isActive(link.href)
+                      ? "text-orange bg-orange/10"
+                      : "text-navy-soft hover:text-orange hover:bg-cream-warm"
+                  )}
                 >
                   {link.label}
                 </Link>
@@ -88,7 +111,7 @@ export function SiteHeader() {
                 size="sm"
                 className="hidden sm:inline-flex bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-semibold"
               >
-                <Link href="#contact">Devis gratuit</Link>
+                <Link href="/contact">Devis gratuit</Link>
               </Button>
 
               {/* Burger */}
@@ -120,7 +143,7 @@ export function SiteHeader() {
         />
         <div
           className={cn(
-            "absolute right-0 top-0 h-full w-[88%] max-w-sm bg-cream shadow-2xl transition-transform duration-300 flex flex-col",
+            "absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-2xl transition-transform duration-300 flex flex-col",
             mobileOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
@@ -146,8 +169,13 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 rounded-lg text-navy font-semibold hover:bg-cream-warm hover:text-orange transition-colors"
+                onClick={handleNavClick}
+                className={cn(
+                  "block px-4 py-3 rounded-lg font-semibold transition-colors",
+                  isActive(link.href)
+                    ? "text-orange bg-orange/10"
+                    : "text-navy hover:bg-cream-warm hover:text-orange"
+                )}
               >
                 {link.label}
               </Link>
@@ -165,7 +193,7 @@ export function SiteHeader() {
               asChild
               className="w-full bg-orange hover:bg-orange-deep text-white shadow-glow-orange"
             >
-              <Link href="#contact" onClick={() => setMobileOpen(false)}>
+              <Link href="/contact">
                 Demander un devis gratuit
               </Link>
             </Button>

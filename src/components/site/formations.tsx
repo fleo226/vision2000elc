@@ -188,7 +188,7 @@ export function Formations() {
                         </div>
 
                         <Button asChild variant="outline" className="w-full group/btn border-orange/30 text-orange hover:bg-orange hover:text-white hover:border-orange font-semibold">
-                          <Link href="#contact">
+                          <Link href="/contact">
                             S'inscrire
                             <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                           </Link>

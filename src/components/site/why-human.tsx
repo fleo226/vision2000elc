@@ -57,14 +57,11 @@ const colorMap: Record<string, string> = {
 
 export function WhyHuman() {
   return (
-    <section id="pourquoi-humain" className="relative py-20 lg:py-28 gradient-navy text-cream overflow-hidden">
-      <div className="absolute inset-0 pattern-grid opacity-30" />
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-orange/15 rounded-full blur-3xl animate-blob" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-crimson/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
+    <section id="pourquoi-humain" className="relative py-20 lg:py-28 bg-cream overflow-hidden">
+      <div className="absolute inset-0 pattern-dots opacity-50" />
 
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          light
           eyebrow="Pourquoi Humain > IA"
           title={<>L'IA traduit les mots. <span className="gradient-text-orange">Nous traduisons le sens.</span></>}
           intro="Google Translate, ChatGPT et autres outils IA sont séduisants — gratuits, rapides, accessibles. Mais pour vos documents officiels, vos contrats, vos conférences et votre image professionnelle, ils présentent des risques majeurs. Voici pourquoi des centaines de professionnels, ONG et institutions continuent de nous confier leurs communications critiques."
@@ -81,16 +78,16 @@ export function WhyHuman() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="glass rounded-2xl p-6 hover:bg-cream/10 transition-colors"
+                className="bg-white rounded-2xl p-6 border border-navy/8 shadow-soft hover:shadow-card transition-all"
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${colorMap[a.color]}`}>
-                  <Icon className="w-6 h-6" />
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${colorMap[a.color]}`}>
+                  <Icon className="w-7 h-7" />
                 </div>
-                <h3 className="font-display text-lg font-bold text-cream mb-2">{a.title}</h3>
-                <p className="text-sm text-cream/75 leading-relaxed mb-3">{a.text}</p>
-                <div className="flex items-start gap-2 pt-3 border-t border-cream/10">
+                <h3 className="font-display text-lg font-bold text-navy mb-2">{a.title}</h3>
+                <p className="text-sm text-navy-soft/80 leading-relaxed mb-3">{a.text}</p>
+                <div className="flex items-start gap-2 pt-3 border-t border-navy/8">
                   <X className="w-4 h-4 text-crimson mt-0.5 shrink-0" />
-                  <p className="text-xs text-cream/55 italic">{a.contrast}</p>
+                  <p className="text-xs text-navy-soft/60 italic">{a.contrast}</p>
                 </div>
               </motion.div>
             )
@@ -103,24 +100,24 @@ export function WhyHuman() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-14 glass rounded-3xl p-6 sm:p-10 overflow-hidden"
+          className="mt-14 bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-navy/8 overflow-hidden"
         >
-          <h3 className="font-display text-xl sm:text-2xl font-bold text-cream mb-6 text-center">
+          <h3 className="font-display text-xl sm:text-2xl font-bold text-navy mb-6 text-center">
             Comparatif : Humain vs IA sur vos besoins critiques
           </h3>
 
           <div className="overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10">
             <table className="w-full min-w-[640px]">
               <thead>
-                <tr className="border-b border-cream/15">
-                  <th className="text-left py-4 pr-4 text-sm font-semibold text-cream/70">Critère</th>
+                <tr className="border-b border-navy/10">
+                  <th className="text-left py-4 pr-4 text-sm font-semibold text-navy-soft/70">Critère</th>
                   <th className="text-center py-4 px-4 text-sm font-bold text-emerald">
                     <div className="flex flex-col items-center gap-1">
                       <Heart className="w-5 h-5" />
                       VISION 2000 ELC (Humain)
                     </div>
                   </th>
-                  <th className="text-center py-4 px-4 text-sm font-bold text-cream/60">
+                  <th className="text-center py-4 px-4 text-sm font-bold text-navy-soft/60">
                     <div className="flex flex-col items-center gap-1">
                       <Zap className="w-5 h-5" />
                       Outils IA publics
@@ -130,13 +127,13 @@ export function WhyHuman() {
               </thead>
               <tbody>
                 {COMPARISON.map((row, i) => (
-                  <tr key={row.criteria} className={i % 2 === 0 ? "bg-cream/5" : ""}>
-                    <td className="py-3 pr-4 text-sm text-cream/85 font-medium">{row.criteria}</td>
+                  <tr key={row.criteria} className={i % 2 === 0 ? "bg-cream-warm/40" : ""}>
+                    <td className="py-3 pr-4 text-sm text-navy font-medium">{row.criteria}</td>
                     <td className="py-3 px-4 text-center">
                       {row.human ? (
                         <Check className="w-5 h-5 text-emerald mx-auto" />
                       ) : (
-                        <X className="w-5 h-5 text-cream/30 mx-auto" />
+                        <X className="w-5 h-5 text-navy/20 mx-auto" />
                       )}
                     </td>
                     <td className="py-3 px-4 text-center">
@@ -154,11 +151,11 @@ export function WhyHuman() {
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-bold h-14 px-7">
-              <Link href="#contact">
+              <Link href="/contact">
                 Discuter avec un expert humain
               </Link>
             </Button>
-            <div className="flex items-center gap-2 text-sm text-cream/70">
+            <div className="flex items-center gap-2 text-sm text-navy-soft/70">
               <Lock className="w-4 h-4 text-emerald" />
               Vos documents restent confidentiels, toujours.
             </div>
@@ -180,11 +177,11 @@ export function WhyHuman() {
           ].map((b) => {
             const Icon = b.icon
             return (
-              <div key={b.title} className="flex items-start gap-3 glass rounded-xl p-4">
+              <div key={b.title} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-navy/8 shadow-soft">
                 <Icon className="w-6 h-6 text-orange shrink-0" />
                 <div>
-                  <div className="font-semibold text-cream text-sm">{b.title}</div>
-                  <div className="text-xs text-cream/65 mt-0.5">{b.text}</div>
+                  <div className="font-semibold text-navy text-sm">{b.title}</div>
+                  <div className="text-xs text-navy-soft/70 mt-0.5">{b.text}</div>
                 </div>
               </div>
             )

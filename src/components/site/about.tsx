@@ -25,7 +25,7 @@ const colorMap: Record<string, string> = {
 export function About() {
   return (
     <section id="a-propos" className="relative py-20 lg:py-28 bg-white overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-cream-warm/40 -skew-x-6 origin-top-right" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-cream/40 -skew-x-6 origin-top-right" />
 
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
@@ -67,22 +67,19 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-navy text-cream rounded-2xl p-7 relative overflow-hidden"
+              className="bg-orange/5 rounded-2xl p-7 border border-orange/15"
             >
-              <div className="absolute inset-0 pattern-grid opacity-20" />
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-xl bg-orange/15 text-orange flex items-center justify-center">
-                    <Eye className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-cream">Notre vision</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 rounded-xl bg-orange/15 text-orange flex items-center justify-center">
+                  <Eye className="w-6 h-6" />
                 </div>
-                <p className="text-cream/85 leading-relaxed text-lg">
-                  Former une nouvelle génération de professionnels bilingues capables d'évoluer
-                  dans un monde globalisé, et demeurer le partenaire linguistique de référence
-                  des organisations qui font l'Afrique de demain.
-                </p>
+                <h3 className="font-display text-xl font-bold text-navy">Notre vision</h3>
               </div>
+              <p className="text-navy-soft/85 leading-relaxed text-lg">
+                Former une nouvelle génération de professionnels bilingues capables d'évoluer
+                dans un monde globalisé, et demeurer le partenaire linguistique de référence
+                des organisations qui font l'Afrique de demain.
+              </p>
             </motion.div>
 
             <motion.div
@@ -90,7 +87,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-cream-warm rounded-2xl p-7 border border-navy/8"
+              className="bg-cream rounded-2xl p-7 border border-navy/8"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-12 h-12 rounded-xl bg-crimson/10 text-crimson flex items-center justify-center">
@@ -114,7 +111,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-cream-warm to-cream rounded-3xl p-7 border border-navy/8 shadow-soft"
+              className="bg-gradient-cream rounded-3xl p-7 border border-navy/8 shadow-soft"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-orange/10 text-orange flex items-center justify-center">
@@ -122,7 +119,7 @@ export function About() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl font-bold text-navy">Nos valeurs</h3>
-                  <p className="text-xs text-navy-soft/60">Les piliers de notre engagement</p>
+                  <p className="text-xs text-navy-soft/70">Les piliers de notre engagement</p>
                 </div>
               </div>
 
@@ -141,7 +138,7 @@ export function About() {
               </div>
 
               <Button asChild className="w-full mt-6 bg-navy hover:bg-navy-soft text-cream font-semibold h-12">
-                <Link href="#contact">
+                <Link href="/contact">
                   Devenir notre prochain client satisfait
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>

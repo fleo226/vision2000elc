@@ -14,7 +14,7 @@ const SERVICES = [
     description:
       "Anglais général, professionnel, Business English, préparation TOEIC/TOEFL/IELTS, cours en entreprise ou en ligne. Programmes sur-mesure pour débutants et avancés.",
     items: ["Anglais général & professionnel", "Business English", "Préparation TOEIC / TOEFL / IELTS", "Cours particuliers & en entreprise", "Formation en ligne"],
-    cta: { label: "Voir les formations", href: "#formations" },
+    cta: { label: "Voir les formations", href: "/formations" },
   },
   {
     icon: Languages,
@@ -23,7 +23,7 @@ const SERVICES = [
     description:
       "Traduction spécialisée français ↔ anglais de documents administratifs, juridiques, techniques, financiers et sites web. Révision par des linguistes professionnels et livraison express possible.",
     items: ["Français ↔ Anglais", "Documents administratifs & juridiques", "Rapports de projets & contrats", "Documents techniques & financiers", "Sites web & brochures"],
-    cta: { label: "Demander un devis", href: "#traduction" },
+    cta: { label: "Demander un devis", href: "/traduction" },
   },
   {
     icon: Mic,
@@ -32,7 +32,7 @@ const SERVICES = [
     description:
       "Interprétation simultanée et consécutive pour conférences internationales, réunions ministérielles, ateliers et missions diplomatiques. Des cabines équipées et des interprètes certifiés.",
     items: ["Interprétation simultanée & consécutive", "Conférences internationales", "Réunions ministérielles & diplomatiques", "Ateliers, séminaires & forums", "Missions de terrain"],
-    cta: { label: "Réserver un interprète", href: "#interpretation" },
+    cta: { label: "Réserver un interprète", href: "/interpretation" },
   },
   {
     icon: Briefcase,
@@ -41,7 +41,7 @@ const SERVICES = [
     description:
       "Préparation d'entretiens, communication professionnelle, présentations en anglais, coaching exécutif personnalisé. Développez votre aisance à l'oral comme à l'écrit.",
     items: ["Préparation d'entretiens", "Communication professionnelle", "Présentations en anglais", "Coaching exécutif", "Accompagnement personnalisé"],
-    cta: { label: "Réserver une séance", href: "#contact" },
+    cta: { label: "Réserver une séance", href: "/contact" },
   },
 ]
 

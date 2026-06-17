@@ -152,11 +152,11 @@ export function Hero() {
                     <img src="/logo.jpeg" alt="VISION 2000 ELC" className="w-10 h-10 rounded-lg object-cover ring-1 ring-orange/30 shrink-0" />
                     <div className="min-w-0 flex-1">
                       <div className="font-display font-bold text-navy text-sm">VISION 2000 ELC</div>
-                      <div className="text-[11px] text-navy-soft/70 truncate">+20 ans d'expertise humaine à Ouagadougou</div>
+                      <div className="text-[11px] text-navy-soft/70 truncate">{t("hero.overlay.desc")}</div>
                     </div>
                     <div className="text-right shrink-0">
                       <div className="font-display font-extrabold text-orange text-lg leading-none">20+</div>
-                      <div className="text-[10px] text-navy-soft/70 uppercase tracking-wider">ans</div>
+                      <div className="text-[10px] text-navy-soft/70 uppercase tracking-wider">{t("hero.overlay.years")}</div>
                     </div>
                   </div>
                 </div>

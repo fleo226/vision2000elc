@@ -6,33 +6,33 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useLang } from "@/lib/lang-context"
 
-const NAV_SECTIONS = [
+const NAV_SECTIONS_KEYS = [
   {
-    title: "Services",
+    titleKey: "footer.services",
     links: [
-      { label: "Formation en anglais", href: "/formations" },
-      { label: "Traduction professionnelle", href: "/traduction" },
-      { label: "Interprétation", href: "/interpretation" },
-      { label: "Coaching linguistique", href: "/services" },
+      { labelKey: "footer.formation", href: "/formations" },
+      { labelKey: "footer.traduction", href: "/traduction" },
+      { labelKey: "footer.interpretation", href: "/interpretation" },
+      { labelKey: "footer.coaching", href: "/services" },
     ],
   },
   {
-    title: "Centre",
+    titleKey: "footer.center",
     links: [
-      { label: "À propos", href: "/a-propos" },
-      { label: "Galerie photos", href: "/galerie" },
-      { label: "Pourquoi Humain vs IA", href: "/pourquoi-humain" },
-      { label: "Témoignages", href: "/temoignages" },
-      { label: "Blog & conseils", href: "/blog" },
+      { labelKey: "footer.apropos", href: "/a-propos" },
+      { labelKey: "footer.galerie", href: "/galerie" },
+      { labelKey: "footer.pourquoi", href: "/pourquoi-humain" },
+      { labelKey: "footer.temoignages", href: "/temoignages" },
+      { labelKey: "footer.blog", href: "/blog" },
     ],
   },
   {
-    title: "Contact",
+    titleKey: "footer.contact",
     links: [
-      { label: "Demander un devis", href: "/contact" },
-      { label: "S'inscrire à une formation", href: "/formations" },
-      { label: "Réserver un interprète", href: "/interpretation" },
-      { label: "FAQ", href: "/pourquoi-humain" },
+      { labelKey: "footer.devis", href: "/contact" },
+      { labelKey: "footer.inscrire", href: "/formations" },
+      { labelKey: "footer.reserver", href: "/interpretation" },
+      { labelKey: "footer.faq", href: "/pourquoi-humain" },
     ],
   },
 ]
@@ -88,14 +88,12 @@ export function Footer() {
                   VISION <span className="text-crimson">2000</span> ELC
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.18em] text-cream/60 font-semibold">
-                  Formation · Traduction · Interprétation
+                  {t("footer.tagline")}
                 </div>
               </div>
             </div>
             <p className="text-sm text-cream/70 leading-relaxed mb-5 max-w-sm">
-              Centre de référence à Ouagadougou depuis plus de 20 ans. Nous accompagnons particuliers,
-              entreprises, ONG et institutions dans leur communication internationale — avec une expertise
-              100% humaine, confidentielle et certifiée.
+              {t("footer.desc")}
             </p>
             <div className="space-y-2 text-sm">
               <a href="https://maps.google.com/?q=Koulouba+Ouagadougou+Burkina+Faso" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-cream/75 hover:text-orange transition-colors">
@@ -119,19 +117,19 @@ export function Footer() {
 
           {/* Liens */}
           <div className="lg:col-span-6 grid sm:grid-cols-3 gap-6">
-            {NAV_SECTIONS.map((s) => (
-              <div key={s.title}>
+            {NAV_SECTIONS_KEYS.map((s) => (
+              <div key={s.titleKey}>
                 <h4 className="font-display font-bold text-cream mb-3 text-sm uppercase tracking-wider">
-                  {s.title}
+                  {t(s.titleKey)}
                 </h4>
                 <ul className="space-y-2">
                   {s.links.map((l) => (
-                    <li key={l.label}>
+                    <li key={l.labelKey}>
                       <Link
                         href={l.href}
                         className="text-sm text-cream/70 hover:text-orange transition-colors"
                       >
-                        {l.label}
+                        {t(l.labelKey)}
                       </Link>
                     </li>
                   ))}
@@ -143,7 +141,7 @@ export function Footer() {
           {/* Réseaux sociaux */}
           <div className="lg:col-span-2">
             <h4 className="font-display font-bold text-cream mb-3 text-sm uppercase tracking-wider">
-              Suivez-nous
+              {t("footer.follow")}
             </h4>
             <div className="flex flex-wrap gap-2">
               {SOCIALS.map((s) => {
@@ -165,7 +163,7 @@ export function Footer() {
             </div>
             <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald/10 text-emerald text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
-              Disponible maintenant
+              {t("footer.available")}
             </div>
           </div>
         </div>
@@ -173,13 +171,13 @@ export function Footer() {
         {/* Bandeau bas */}
         <div className="pt-8 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/55">
           <div className="text-center sm:text-left">
-            © {new Date().getFullYear()} VISION 2000 ELC. Tous droits réservés.
-            <span className="hidden sm:inline"> · Conçu avec expertise à Ouagadougou.</span>
+            © {new Date().getFullYear()} VISION 2000 ELC. {t("footer.rights")}
+            <span className="hidden sm:inline"> · {t("footer.madeIn")}</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="#" className="hover:text-orange transition-colors">Mentions légales</Link>
-            <Link href="#" className="hover:text-orange transition-colors">Confidentialité</Link>
-            <Link href="#" className="hover:text-orange transition-colors">CGV</Link>
+            <Link href="#" className="hover:text-orange transition-colors">{t("footer.legal")}</Link>
+            <Link href="#" className="hover:text-orange transition-colors">{t("footer.privacy")}</Link>
+            <Link href="#" className="hover:text-orange transition-colors">{t("footer.cgv")}</Link>
           </div>
         </div>
       </div>

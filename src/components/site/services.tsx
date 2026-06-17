@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { GraduationCap, Languages, Mic, Briefcase, ArrowRight, Check } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { TiltCard } from "./effects"
 
 const SERVICES = [
   {
@@ -75,7 +76,8 @@ export function Services() {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
-                <Card className={`group relative overflow-hidden p-7 lg:p-8 border-navy/8 shadow-soft hover:shadow-card transition-all duration-300 bg-white h-full`}>
+                <TiltCard intensity={6} className="h-full" data-cursor="hover">
+                <Card className={`group relative overflow-hidden p-7 lg:p-8 border-navy/8 shadow-soft hover:shadow-card transition-all duration-300 bg-white h-full`} style={{ transformStyle: "preserve-3d" }}>
                   <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
                   <div className="relative">
                     <div className="flex items-start justify-between mb-5">
@@ -115,6 +117,7 @@ export function Services() {
                     </Button>
                   </div>
                 </Card>
+                </TiltCard>
               </motion.div>
             )
           })}

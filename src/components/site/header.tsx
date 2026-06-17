@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: "/formations", labelKey: "nav.formations" },
   { href: "/traduction", labelKey: "nav.traduction" },
   { href: "/interpretation", labelKey: "nav.interpretation" },
+  { href: "/galerie", labelKey: "nav.galerie" },
   { href: "/a-propos", labelKey: "nav.apropos" },
   { href: "/temoignages", labelKey: "nav.temoignages" },
   { href: "/blog", labelKey: "nav.blog" },

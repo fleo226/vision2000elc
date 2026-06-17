@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/interpretation",
     "/pourquoi-humain",
     "/a-propos",
+    "/galerie",
     "/temoignages",
     "/blog",
     "/contact",

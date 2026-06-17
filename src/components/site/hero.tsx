@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Phone, Star, ShieldCheck, Clock, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLang } from "@/lib/lang-context"
+import { Parallax, MagneticButton } from "./effects"
 
 export function Hero() {
   const { t } = useLang()
@@ -62,16 +63,12 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3"
             >
-              <Button
-                asChild
-                size="lg"
-                className="bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-bold text-base h-14 px-7 group"
-              >
-                <Link href="/contact">
+              <MagneticButton as="a" href="/contact" className="inline-block">
+                <span className="inline-flex items-center justify-center bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-bold text-base h-14 px-7 rounded-md group transition-colors">
                   {t("hero.cta1")}
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+                </span>
+              </MagneticButton>
               <Button
                 asChild
                 size="lg"
@@ -133,6 +130,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="relative"
             >
+              <Parallax speed={0.12}>
               {/* Photo principale du formateur en session */}
               <div className="relative rounded-3xl overflow-hidden shadow-card border border-navy/8">
                 { }
@@ -160,6 +158,7 @@ export function Hero() {
                   </div>
                 </div>
               </div>
+              </Parallax>
 
               {/* Badge flottant */}
               <motion.div

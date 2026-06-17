@@ -20,6 +20,7 @@ const NAV_SECTIONS = [
     title: "Centre",
     links: [
       { label: "À propos", href: "/a-propos" },
+      { label: "Galerie photos", href: "/galerie" },
       { label: "Pourquoi Humain vs IA", href: "/pourquoi-humain" },
       { label: "Témoignages", href: "/temoignages" },
       { label: "Blog & conseils", href: "/blog" },

@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import { Award, BookOpen, Mic, Users } from "lucide-react"
 import { SectionHeading } from "./services"
+import { useLang } from "@/lib/lang-context"
 
 const STATS = [
-  { icon: Award, value: 20, suffix: "+", label: "Années d'expérience", sub: "Au service du Burkina Faso et de la sous-région", color: "orange" },
-  { icon: BookOpen, value: 1000000, suffix: "+", label: "Mots traduits", sub: "Documents administratifs, juridiques, techniques", color: "emerald", format: "compact" },
-  { icon: Users, value: 500, suffix: "+", label: "Professionnels formés", sub: "Cadres, fonctionnaires, étudiants, entrepreneurs", color: "crimson" },
-  { icon: Mic, value: 100, suffix: "+", label: "Conférences accompagnées", sub: "Nationales et internationales", color: "gold" },
+  { icon: Award, value: 20, suffix: "+", labelKey: "stats.1.label", subKey: "stats.1.sub", color: "orange" },
+  { icon: BookOpen, value: 1000000, suffix: "+", labelKey: "stats.2.label", subKey: "stats.2.sub", color: "emerald", format: "compact" },
+  { icon: Users, value: 500, suffix: "+", labelKey: "stats.3.label", subKey: "stats.3.sub", color: "crimson" },
+  { icon: Mic, value: 100, suffix: "+", labelKey: "stats.4.label", subKey: "stats.4.sub", color: "gold" },
 ]
 
 const colorMap: Record<string, string> = {
@@ -55,13 +56,14 @@ function Counter({ value, suffix = "", format = "default" }: { value: number; su
 }
 
 export function Stats() {
+  const { t } = useLang()
   return (
     <section id="realisations" className="relative py-20 lg:py-28 bg-cream-warm overflow-hidden">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Réalisations"
-          title={<>Des chiffres qui <span className="gradient-text-orange">parlent d'eux-mêmes</span></>}
-          intro="Plus de deux décennies d'engagement auprès des particuliers, entreprises, ONG et institutions du Burkina Faso. Chaque chiffre représente une mission réussie, un professionnel accompagné, une communication facilitée."
+          eyebrow={t("stats.eyebrow")}
+          title={<>{t("stats.title1")}<span className="gradient-text-orange">{t("stats.title2")}</span></>}
+          intro={t("stats.intro")}
         />
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
@@ -69,7 +71,7 @@ export function Stats() {
             const Icon = s.icon
             return (
               <motion.div
-                key={s.label}
+                key={s.labelKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -84,8 +86,8 @@ export function Stats() {
                   <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-1 tracking-tight">
                     <Counter value={s.value} suffix={s.suffix} format={s.format as "default" | "compact"} />
                   </div>
-                  <div className="font-display font-bold text-navy text-sm sm:text-base mb-1">{s.label}</div>
-                  <div className="text-xs text-navy-soft/65 leading-relaxed">{s.sub}</div>
+                  <div className="font-display font-bold text-navy text-sm sm:text-base mb-1">{t(s.labelKey)}</div>
+                  <div className="text-xs text-navy-soft/65 leading-relaxed">{t(s.subKey)}</div>
                 </div>
               </motion.div>
             )
@@ -103,16 +105,15 @@ export function Stats() {
           <div className="relative grid md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-2">
               <h3 className="font-display text-2xl sm:text-3xl font-bold mb-3">
-                Un partenariat linguistique durable, pas une simple prestation
+                {t("stats.retention.title")}
               </h3>
               <p className="text-cream/75 leading-relaxed">
-                80% de nos clients renouvellent leurs missions avec nous. C'est notre meilleure publicité :
-                la confiance que nous construisons mission après mission, document après document, formation après formation.
+                {t("stats.retention.text")}
               </p>
             </div>
             <div className="text-center md:text-right">
               <div className="font-display text-6xl font-extrabold gradient-text-orange">80%</div>
-              <div className="text-sm text-cream/70 mt-1">de clients fidèles</div>
+              <div className="text-sm text-cream/70 mt-1">{t("stats.retention.sub")}</div>
             </div>
           </div>
         </motion.div>

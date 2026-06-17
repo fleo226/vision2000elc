@@ -6,43 +6,48 @@ import { GraduationCap, Languages, Mic, Briefcase, ArrowRight, Check } from "luc
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { TiltCard } from "./effects"
+import { useLang } from "@/lib/lang-context"
 
 const SERVICES = [
   {
     icon: GraduationCap,
-    title: "Formation en anglais",
     color: "orange",
-    description:
-      "Anglais général, professionnel, Business English, préparation TOEIC/TOEFL/IELTS, cours en entreprise ou en ligne. Programmes sur-mesure pour débutants et avancés.",
-    items: ["Anglais général & professionnel", "Business English", "Préparation TOEIC / TOEFL / IELTS", "Cours particuliers & en entreprise", "Formation en ligne"],
-    cta: { label: "Voir les formations", href: "/formations" },
+    titleKey: "services.formation.title",
+    descKey: "services.formation.desc",
+    ctaKey: "services.formation.cta",
+    ctaHref: "/formations",
+    itemsFr: ["Anglais général & professionnel", "Business English", "Préparation TOEIC / TOEFL / IELTS", "Cours particuliers & en entreprise", "Formation en ligne"],
+    itemsEn: ["General & professional English", "Business English", "TOEIC / TOEFL / IELTS preparation", "Private & in-house courses", "Online training"],
   },
   {
     icon: Languages,
-    title: "Traduction professionnelle",
     color: "navy",
-    description:
-      "Traduction spécialisée français ↔ anglais de documents administratifs, juridiques, techniques, financiers et sites web. Révision par des linguistes professionnels et livraison express possible.",
-    items: ["Français ↔ Anglais", "Documents administratifs & juridiques", "Rapports de projets & contrats", "Documents techniques & financiers", "Sites web & brochures"],
-    cta: { label: "Demander un devis", href: "/traduction" },
+    titleKey: "services.traduction.title",
+    descKey: "services.traduction.desc",
+    ctaKey: "services.traduction.cta",
+    ctaHref: "/traduction",
+    itemsFr: ["Français ↔ Anglais", "Documents administratifs & juridiques", "Rapports de projets & contrats", "Documents techniques & financiers", "Sites web & brochures"],
+    itemsEn: ["French ↔ English", "Administrative & legal documents", "Project reports & contracts", "Technical & financial documents", "Websites & brochures"],
   },
   {
     icon: Mic,
-    title: "Interprétation",
     color: "crimson",
-    description:
-      "Interprétation simultanée et consécutive pour conférences internationales, réunions ministérielles, ateliers et missions diplomatiques. Des cabines équipées et des interprètes certifiés.",
-    items: ["Interprétation simultanée & consécutive", "Conférences internationales", "Réunions ministérielles & diplomatiques", "Ateliers, séminaires & forums", "Missions de terrain"],
-    cta: { label: "Réserver un interprète", href: "/interpretation" },
+    titleKey: "services.interpretation.title",
+    descKey: "services.interpretation.desc",
+    ctaKey: "services.interpretation.cta",
+    ctaHref: "/interpretation",
+    itemsFr: ["Interprétation simultanée & consécutive", "Conférences internationales", "Réunions ministérielles & diplomatiques", "Ateliers, séminaires & forums", "Missions de terrain"],
+    itemsEn: ["Simultaneous & consecutive interpreting", "International conferences", "Ministerial & diplomatic meetings", "Workshops, seminars & forums", "Field missions"],
   },
   {
     icon: Briefcase,
-    title: "Coaching linguistique",
     color: "emerald",
-    description:
-      "Préparation d'entretiens, communication professionnelle, présentations en anglais, coaching exécutif personnalisé. Développez votre aisance à l'oral comme à l'écrit.",
-    items: ["Préparation d'entretiens", "Communication professionnelle", "Présentations en anglais", "Coaching exécutif", "Accompagnement personnalisé"],
-    cta: { label: "Réserver une séance", href: "/contact" },
+    titleKey: "services.coaching.title",
+    descKey: "services.coaching.desc",
+    ctaKey: "services.coaching.cta",
+    ctaHref: "/contact",
+    itemsFr: ["Préparation d'entretiens", "Communication professionnelle", "Présentations en anglais", "Coaching exécutif", "Accompagnement personnalisé"],
+    itemsEn: ["Interview preparation", "Professional communication", "English presentations", "Executive coaching", "Personalized support"],
   },
 ]
 
@@ -54,23 +59,25 @@ const colorMap: Record<string, { bg: string; text: string; ring: string; hover: 
 }
 
 export function Services() {
+  const { t, lang } = useLang()
   return (
     <section id="services" className="relative py-20 lg:py-28 bg-cream overflow-hidden">
       <div className="absolute inset-0 pattern-dots opacity-50" />
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Nos Services"
-          title={<>Une expertise linguistique <span className="gradient-text-orange">complète</span>, tout au long de votre parcours</>}
-          intro="De la formation à la traduction, de l'interprétation au coaching exécutif, VISION 2000 ELC vous accompagne à chaque étape de votre communication internationale. Quatre pôles d'expertise, une même exigence : l'excellence humaine."
+          eyebrow={t("services.eyebrow")}
+          title={<>{t("services.title1")}<span className="gradient-text-orange">{t("services.title2")}</span>{t("services.title3")}</>}
+          intro={t("services.intro")}
         />
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mt-14">
           {SERVICES.map((service, i) => {
             const Icon = service.icon
             const c = colorMap[service.color]
+            const items = lang === "en" ? service.itemsEn : service.itemsFr
             return (
               <motion.div
-                key={service.title}
+                key={service.titleKey}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -90,14 +97,14 @@ export function Services() {
                     </div>
 
                     <h3 className="font-display text-2xl font-bold text-navy mb-3">
-                      {service.title}
+                      {t(service.titleKey)}
                     </h3>
                     <p className="text-navy-soft/80 leading-relaxed mb-5 text-[15px]">
-                      {service.description}
+                      {t(service.descKey)}
                     </p>
 
                     <ul className="space-y-2 mb-6">
-                      {service.items.map((item) => (
+                      {items.map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-navy-soft">
                           <Check className={`w-4 h-4 ${c.text} mt-0.5 shrink-0`} />
                           <span>{item}</span>
@@ -110,8 +117,8 @@ export function Services() {
                       variant="ghost"
                       className={`px-0 hover:bg-transparent ${c.text} hover:${c.text} font-semibold text-sm group/btn`}
                     >
-                      <Link href={service.cta.href}>
-                        {service.cta.label}
+                      <Link href={service.ctaHref}>
+                        {t(service.ctaKey)}
                         <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </Button>

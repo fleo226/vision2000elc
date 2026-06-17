@@ -109,12 +109,6 @@
     background: #F97316;
     color: #FFFFFF;
   }
-  /* Cacher le curseur natif sur desktop (curseur personnalisé activé) */
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button, [role=button], input, textarea, select, label, [data-cursor=hover] {
-      cursor: none;
-    }
-  }
 }
 
 /* Utilitaires de marque */

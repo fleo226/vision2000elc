@@ -2,17 +2,19 @@
 
 import { motion } from "framer-motion"
 import { Building2, Landmark, HeartHandshake, GraduationCap, Banknote, Users } from "lucide-react"
+import { useLang } from "@/lib/lang-context"
 
 const CLIENTS = [
-  { icon: Landmark, label: "Institutions gouvernementales", short: "Ministères & États" },
-  { icon: Building2, label: "Entreprises privées", short: "Entreprises" },
-  { icon: HeartHandshake, label: "ONG & projets de développement", short: "ONG" },
-  { icon: Banknote, label: "Banques & institutions financières", short: "Banques" },
-  { icon: GraduationCap, label: "Établissements scolaires & universités", short: "Universités" },
-  { icon: Users, label: "Particuliers & professionnels", short: "Particuliers" },
+  { icon: Landmark, labelKey: "trustbar.ministries", shortKey: "trustbar.ministries" },
+  { icon: Building2, labelKey: "trustbar.companies", shortKey: "trustbar.companies" },
+  { icon: HeartHandshake, labelKey: "trustbar.ngo", shortKey: "trustbar.ngo" },
+  { icon: Banknote, labelKey: "trustbar.banks", shortKey: "trustbar.banks" },
+  { icon: GraduationCap, labelKey: "trustbar.universities", shortKey: "trustbar.universities" },
+  { icon: Users, labelKey: "trustbar.individuals", shortKey: "trustbar.individuals" },
 ]
 
 export function TrustBar() {
+  const { t } = useLang()
   return (
     <section className="relative -mt-2 py-12 bg-cream border-b border-navy/5">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -22,14 +24,14 @@ export function TrustBar() {
           viewport={{ once: true }}
           className="text-center text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-navy-soft/60 mb-8"
         >
-          Ils nous confient leur communication internationale depuis 2003
+          {t("trustbar.label")}
         </motion.p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {CLIENTS.map((c, i) => {
             const Icon = c.icon
             return (
               <motion.div
-                key={c.short}
+                key={c.shortKey}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -40,7 +42,7 @@ export function TrustBar() {
                   <Icon className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-medium text-navy-soft leading-tight max-w-[110px]">
-                  {c.short}
+                  {t(c.shortKey)}
                 </span>
               </motion.div>
             )

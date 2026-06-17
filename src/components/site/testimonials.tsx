@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "./services"
 import { useAutoCarousel } from "./effects"
+import { useLang } from "@/lib/lang-context"
 
 const TESTIMONIALS = [
   {
@@ -45,6 +46,7 @@ const TESTIMONIALS = [
 ]
 
 export function Testimonials() {
+  const { t } = useLang()
   const { idx, direction, paused, setPaused, go, goTo } = useAutoCarousel(TESTIMONIALS.length, 6000)
 
   const current = TESTIMONIALS[idx]
@@ -59,9 +61,9 @@ export function Testimonials() {
       <div className="absolute inset-0 pattern-dots opacity-50" />
       <div className="relative container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Témoignages"
-          title={<>Ce que disent <span className="gradient-text-orange">ceux qui nous font confiance</span></>}
-          intro="La meilleure preuve de notre expertise, ce sont les mots de nos clients. Voici quelques-uns de leurs retours, recueillis au fil de nos missions."
+          eyebrow={t("testimonials.eyebrow")}
+          title={<>{t("testimonials.title1")}<span className="gradient-text-orange">{t("testimonials.title2")}</span></>}
+          intro={t("testimonials.intro")}
         />
 
         <div className="mt-14 relative">

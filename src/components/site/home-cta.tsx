@@ -4,8 +4,10 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLang } from "@/lib/lang-context"
 
 export function HomeCTA() {
+  const { t } = useLang()
   return (
     <section className="py-20 lg:py-24 bg-white">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -23,16 +25,15 @@ export function HomeCTA() {
           <div className="relative grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">
-                Prêt à communiquer avec le monde ?
+                {t("homecta.title")}
               </h2>
               <p className="text-white/90 text-lg leading-relaxed mb-6">
-                Discutons de votre projet dès aujourd'hui. La première consultation est gratuite,
-                et nous répondons sous 2h ouvrées.
+                {t("homecta.text")}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="bg-white text-orange hover:bg-cream font-bold h-14 px-7 group">
                   <Link href="/contact">
-                    Demander un devis gratuit
+                    {t("homecta.btn1")}
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -48,10 +49,10 @@ export function HomeCTA() {
             <div className="hidden lg:flex justify-end">
               <div className="grid grid-cols-2 gap-4 max-w-sm">
                 {[
-                  { v: "20+", l: "ans d'expérience" },
-                  { v: "1M+", l: "mots traduits" },
-                  { v: "24h", l: "livraison Express" },
-                  { v: "100%", l: "humain & certifié" },
+                  { v: "20+", l: t("homecta.stat1") },
+                  { v: "1M+", l: t("homecta.stat2") },
+                  { v: "24h", l: t("homecta.stat3") },
+                  { v: "100%", l: t("homecta.stat4") },
                 ].map((s) => (
                   <div key={s.l} className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/15">
                     <div className="font-display text-3xl font-extrabold">{s.v}</div>

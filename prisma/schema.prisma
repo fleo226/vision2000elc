@@ -39,3 +39,36 @@ model Submission {
   @@index([status])
   @@index([createdAt])
 }
+
+// Visites de pages (analytics)
+model Visit {
+  id        String   @id @default(cuid())
+  sessionId String   // identifie une session utilisateur
+  path      String   // chemin de la page visitée (ex: "/formations")
+  referrer  String?  // page précédente (source)
+  userAgent String?  // navigateur/appareil
+  language  String?  // langue du navigateur
+  duration  Int      @default(0) // durée en secondes (mis à jour à la sortie)
+  enteredAt DateTime @default(now()) // moment d'entrée sur la page
+  exitedAt  DateTime? // moment de sortie
+
+  @@index([sessionId])
+  @@index([path])
+  @@index([enteredAt])
+}
+
+// Clics sur éléments (analytics)
+model Click {
+  id        String   @id @default(cuid())
+  sessionId String   // identifie la session
+  path      String   // page où le clic a eu lieu
+  element   String   // type d'élément cliqué (ex: "cta-devis", "whatsapp", "phone")
+  label     String?  // texte ou label du bouton
+  href      String?  // lien destination si applicable
+  timestamp DateTime @default(now())
+
+  @@index([sessionId])
+  @@index([path])
+  @@index([element])
+  @@index([timestamp])
+}

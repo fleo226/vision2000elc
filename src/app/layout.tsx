@@ -4,6 +4,7 @@ import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import { LangProvider } from "@/lib/lang-context"
 import { Loader, ScrollProgress, RouteChangeOverlay, ShareButton } from "@/components/site/effects"
+import { AnalyticsTracker } from "@/components/site/analytics-tracker"
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -240,6 +241,7 @@ export default function RootLayout({
           <ScrollProgress />
           <RouteChangeOverlay />
           <ShareButton />
+          <AnalyticsTracker />
           {children}
           <Toaster />
         </LangProvider>

@@ -6,23 +6,25 @@ import { usePathname } from "next/navigation"
 import { Menu, X, Phone, Globe2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useLang } from "@/lib/lang-context"
 
 const NAV_LINKS = [
-  { href: "/services", label: "Services" },
-  { href: "/pourquoi-humain", label: "Pourquoi Humain" },
-  { href: "/formations", label: "Formations" },
-  { href: "/traduction", label: "Traduction" },
-  { href: "/interpretation", label: "Interprétation" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/temoignages", label: "Témoignages" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: "/services", labelKey: "nav.services" },
+  { href: "/pourquoi-humain", labelKey: "nav.pourquoi" },
+  { href: "/formations", labelKey: "nav.formations" },
+  { href: "/traduction", labelKey: "nav.traduction" },
+  { href: "/interpretation", labelKey: "nav.interpretation" },
+  { href: "/a-propos", labelKey: "nav.apropos" },
+  { href: "/temoignages", labelKey: "nav.temoignages" },
+  { href: "/blog", labelKey: "nav.blog" },
+  { href: "/contact", labelKey: "nav.contact" },
 ]
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
+  const { t, lang, toggle } = useLang()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -36,8 +38,6 @@ export function SiteHeader() {
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
-  // Réinitialiser l'état du menu mobile lors du changement de page
-  // (géré via l'event click des liens plutôt que via useEffect pour éviter les re-renders)
   const handleNavClick = () => {
     setMobileOpen(false)
   }
@@ -66,14 +66,11 @@ export function SiteHeader() {
                 <img src="/logo.jpeg" alt="VISION 2000 ELC" className="w-full h-full object-cover" />
               </div>
               <div className="hidden sm:flex flex-col leading-none">
-                <span className={cn(
-                  "font-display font-extrabold text-lg tracking-tight transition-colors",
-                  scrolled || pathname !== "/" ? "text-navy" : "text-navy"
-                )}>
+                <span className="font-display font-extrabold text-lg tracking-tight text-navy">
                   VISION <span className="text-crimson">2000</span> ELC
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.18em] text-navy-soft/70 font-semibold mt-0.5">
-                  Formation · Traduction · Interprétation
+                  {t("nav.tagline")}
                 </span>
               </div>
             </Link>
@@ -91,27 +88,38 @@ export function SiteHeader() {
                       : "text-navy-soft hover:text-orange hover:bg-cream-warm"
                   )}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
               ))}
             </nav>
 
             {/* CTAs */}
             <div className="flex items-center gap-2">
+              {/* Bouton toggle langue */}
+              <button
+                onClick={toggle}
+                className="inline-flex items-center gap-1.5 px-2.5 py-2 text-sm font-semibold text-navy hover:text-orange transition-colors rounded-md hover:bg-cream-warm"
+                aria-label="Switch language"
+                title={lang === "fr" ? "Switch to English" : "Passer en français"}
+              >
+                <Globe2 className="w-4 h-4" />
+                <span className="font-bold">{lang === "fr" ? "EN" : "FR"}</span>
+              </button>
+
               <a
                 href="tel:+22670462670"
                 className="hidden md:inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold text-navy hover:text-orange transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 <span className="hidden xl:inline">+226 70 46 26 70</span>
-                <span className="xl:hidden">Appeler</span>
+                <span className="xl:hidden">{t("nav.call")}</span>
               </a>
               <Button
                 asChild
                 size="sm"
                 className="hidden sm:inline-flex bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-semibold"
               >
-                <Link href="/contact">Devis gratuit</Link>
+                <Link href="/contact">{t("nav.devis")}</Link>
               </Button>
 
               {/* Burger */}
@@ -177,7 +185,7 @@ export function SiteHeader() {
                     : "text-navy hover:bg-cream-warm hover:text-orange"
                 )}
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             ))}
           </nav>
@@ -193,14 +201,17 @@ export function SiteHeader() {
               asChild
               className="w-full bg-orange hover:bg-orange-deep text-white shadow-glow-orange"
             >
-              <Link href="/contact">
-                Demander un devis gratuit
+              <Link href="/contact" onClick={handleNavClick}>
+                {t("nav.devis")}
               </Link>
             </Button>
-            <div className="flex items-center justify-center gap-2 text-xs text-navy-soft/70 pt-2">
-              <Globe2 className="w-3.5 h-3.5" />
-              <span>Français · English (bientôt)</span>
-            </div>
+            <button
+              onClick={toggle}
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg border border-navy/15 text-navy font-semibold hover:bg-cream-warm"
+            >
+              <Globe2 className="w-4 h-4" />
+              {lang === "fr" ? "Switch to English" : "Passer en français"}
+            </button>
           </div>
         </div>
       </div>

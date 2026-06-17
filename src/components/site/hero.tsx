@@ -4,8 +4,10 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight, Phone, Star, ShieldCheck, Clock, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLang } from "@/lib/lang-context"
 
 export function Hero() {
+  const { t } = useLang()
   return (
     <section
       id="accueil"
@@ -30,7 +32,7 @@ export function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald" />
               </span>
-              Plus de 20 ans d'expertise humaine à Ouagadougou
+              {t("hero.badge")}
             </motion.div>
 
             <motion.h1
@@ -39,9 +41,9 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight text-navy"
             >
-              Maîtrisez l'anglais.
+              {t("hero.title1")}
               <br />
-              <span className="gradient-text-orange">Communiquez</span> avec le monde.
+              <span className="gradient-text-orange">{t("hero.title2")}</span> {t("hero.title3")}
             </motion.h1>
 
             <motion.p
@@ -50,11 +52,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-6 text-base sm:text-lg lg:text-xl text-navy-soft/80 max-w-2xl leading-relaxed"
             >
-              Centre de référence à Ouagadougou.{" "}
-              <strong className="text-navy">Formation en anglais</strong>,{" "}
-              <strong className="text-navy">traduction professionnelle</strong> et{" "}
-              <strong className="text-navy">interprétation de conférences</strong> —
-              par des humains, pour des humains.
+              {t("hero.subtitle")}
             </motion.p>
 
             {/* CTAs */}
@@ -70,7 +68,7 @@ export function Hero() {
                 className="bg-orange hover:bg-orange-deep text-white shadow-glow-orange font-bold text-base h-14 px-7 group"
               >
                 <Link href="/contact">
-                  Demander un devis
+                  {t("hero.cta1")}
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -81,7 +79,7 @@ export function Hero() {
                 className="border-navy/20 text-navy hover:bg-navy hover:text-cream font-semibold text-base h-14 px-7"
               >
                 <Link href="/formations">
-                  Nos formations
+                  {t("hero.cta2")}
                 </Link>
               </Button>
               <Button
@@ -106,15 +104,15 @@ export function Hero() {
             >
               <div className="flex items-center gap-2 text-navy-soft">
                 <ShieldCheck className="w-5 h-5 text-emerald" />
-                <span>Confidentialité garantie</span>
+                <span>{t("hero.trust.confidentiality")}</span>
               </div>
               <div className="flex items-center gap-2 text-navy-soft">
                 <Clock className="w-5 h-5 text-orange" />
-                <span>Livraison express 24-48h</span>
+                <span>{t("hero.trust.express")}</span>
               </div>
               <div className="flex items-center gap-2 text-navy-soft">
                 <Sparkles className="w-5 h-5 text-gold" />
-                <span>100% humain & certifié</span>
+                <span>{t("hero.trust.human")}</span>
               </div>
               <div className="flex items-center gap-1.5 text-navy-soft">
                 <div className="flex">
@@ -122,7 +120,7 @@ export function Hero() {
                     <Star key={i} className="w-4 h-4 fill-gold text-gold" />
                   ))}
                 </div>
-                <span>Depuis 2003</span>
+                <span>{t("hero.trust.since")}</span>
               </div>
             </motion.div>
           </div>

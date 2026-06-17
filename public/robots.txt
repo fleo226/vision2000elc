@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://vision2000elc.com/sitemap.xml
-
-# Optimisé pour le référencement local Ouagadougou / Burkina Faso
-# Formation anglais, traduction, interprétation

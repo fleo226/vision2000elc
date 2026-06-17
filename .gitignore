@@ -79,3 +79,4 @@ scripts/*.webm
 
 # User uploads (source files, not part of site)
 upload/
+tool-results/

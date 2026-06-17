@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Mail, Phone, MapPin, Globe, Facebook, Linkedin, Youtube, MessageCircle, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useLang } from "@/lib/lang-context"
 
 const NAV_SECTIONS = [
   {
@@ -43,6 +44,7 @@ const SOCIALS = [
 ]
 
 export function Footer() {
+  const { t } = useLang()
   return (
     <footer className="relative bg-navy-deep text-cream pt-16 pb-8 overflow-hidden">
       <div className="absolute inset-0 pattern-grid opacity-20" />
@@ -53,21 +55,21 @@ export function Footer() {
         <div className="grid lg:grid-cols-2 gap-8 items-center pb-12 mb-12 border-b border-cream/10">
           <div>
             <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-cream mb-2">
-              Recevez nos conseils en anglais & traduction
+              {t("footer.newsletter.title")}
             </h3>
             <p className="text-cream/70 leading-relaxed">
-              Une newsletter mensuelle, zéro spam. Astuces, actualités du centre et offres réservées aux abonnés.
+              {t("footer.newsletter.desc")}
             </p>
           </div>
           <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
             <Input
               type="email"
               required
-              placeholder="Votre adresse email"
+              placeholder={t("footer.newsletter.placeholder")}
               className="bg-cream/10 border-cream/15 text-cream placeholder:text-cream/50 h-12 focus-visible:ring-orange focus-visible:border-orange"
             />
             <Button type="submit" className="bg-orange hover:bg-orange-deep text-white font-bold h-12 px-6 shadow-glow-orange shrink-0">
-              S'abonner
+              {t("footer.newsletter.btn")}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </form>

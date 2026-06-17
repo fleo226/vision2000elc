@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Clock, BookOpen } from "lucide-react"
+import { ArrowRight, Clock } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,7 @@ const ARTICLES = [
     readTime: "5 min",
     color: "orange",
     image: "/blog-1.jpg",
+    slug: "pourquoi-anglais-2026",
   },
   {
     category: "Certifications",
@@ -26,6 +27,7 @@ const ARTICLES = [
     readTime: "7 min",
     color: "emerald",
     image: "/blog-2.jpg",
+    slug: "avantages-toeic-carriere",
   },
   {
     category: "Conseils",
@@ -35,6 +37,7 @@ const ARTICLES = [
     readTime: "4 min",
     color: "navy",
     image: "/blog-3.jpg",
+    slug: "traduction-vs-interpretation",
   },
   {
     category: "Professionnel",
@@ -44,6 +47,7 @@ const ARTICLES = [
     readTime: "8 min",
     color: "crimson",
     image: "/blog-4.jpg",
+    slug: "presentation-professionnelle-anglais",
   },
   {
     category: "Métiers",
@@ -53,6 +57,7 @@ const ARTICLES = [
     readTime: "6 min",
     color: "gold",
     image: "/blog-5.jpg",
+    slug: "traduction-interpretation-21e-siecle",
   },
 ]
 
@@ -85,38 +90,38 @@ export function Blog() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 lg:row-span-2"
           >
-            <Card className="group h-full overflow-hidden bg-white shadow-soft hover:shadow-card transition-all border-navy/8">
-              <div className="h-56 sm:h-72 relative overflow-hidden bg-navy/5">
-                { }
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/40 to-transparent" />
-                <Badge className={`absolute top-4 left-4 ${colorMap[featured.color]} border-0 font-semibold`}>
-                  À la une
-                </Badge>
-              </div>
-              <div className="p-7">
-                <div className="flex items-center gap-3 text-xs text-navy-soft/60 mb-3">
-                  <Badge variant="outline" className="border-navy/15 text-navy-soft font-medium">{featured.category}</Badge>
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {featured.readTime} de lecture</span>
-                  <span>·</span>
-                  <span>{featured.date}</span>
+            <Link href={`/blog/${featured.slug}`} className="block h-full">
+              <Card className="group h-full overflow-hidden bg-white shadow-soft hover:shadow-card transition-all border-navy/8">
+                <div className="h-56 sm:h-72 relative overflow-hidden bg-navy/5">
+                  { }
+                  <img
+                    src={featured.image}
+                    alt={featured.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/40 to-transparent" />
+                  <Badge className={`absolute top-4 left-4 ${colorMap[featured.color]} border-0 font-semibold`}>
+                    À la une
+                  </Badge>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-navy mb-3 group-hover:text-orange transition-colors">
-                  {featured.title}
-                </h3>
-                <p className="text-navy-soft/80 leading-relaxed mb-5">{featured.excerpt}</p>
-                <Button asChild variant="ghost" className="px-0 hover:bg-transparent text-orange hover:text-orange font-semibold">
-                  <Link href="/blog">
+                <div className="p-7">
+                  <div className="flex items-center gap-3 text-xs text-navy-soft/60 mb-3">
+                    <Badge variant="outline" className="border-navy/15 text-navy-soft font-medium">{featured.category}</Badge>
+                    <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {featured.readTime} de lecture</span>
+                    <span>·</span>
+                    <span>{featured.date}</span>
+                  </div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-navy mb-3 group-hover:text-orange transition-colors">
+                    {featured.title}
+                  </h3>
+                  <p className="text-navy-soft/80 leading-relaxed mb-5">{featured.excerpt}</p>
+                  <span className="inline-flex items-center text-orange font-semibold text-sm group-hover:underline">
                     Lire l'article
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-              </div>
-            </Card>
+                  </span>
+                </div>
+              </Card>
+            </Link>
           </motion.div>
 
           {/* Autres articles */}
@@ -128,40 +133,33 @@ export function Blog() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <Card className="group h-full bg-white shadow-soft hover:shadow-card transition-all border-navy/8 overflow-hidden">
-                <div className="h-40 sm:h-44 relative overflow-hidden bg-navy/5">
-                  { }
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge className={`${colorMap[article.color]} border-0 font-semibold`}>{article.category}</Badge>
-                    <span className="text-xs text-navy-soft/60 flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {article.readTime}
-                    </span>
+              <Link href={`/blog/${article.slug}`} className="block h-full">
+                <Card className="group h-full bg-white shadow-soft hover:shadow-card transition-all border-navy/8 overflow-hidden">
+                  <div className="h-40 sm:h-44 relative overflow-hidden bg-navy/5">
+                    { }
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-navy mb-2 group-hover:text-orange transition-colors leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-sm text-navy-soft/75 leading-relaxed mb-3 line-clamp-3">{article.excerpt}</p>
-                  <div className="text-xs text-navy-soft/55">{article.date}</div>
-                </div>
-              </Card>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge className={`${colorMap[article.color]} border-0 font-semibold`}>{article.category}</Badge>
+                      <span className="text-xs text-navy-soft/60 flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> {article.readTime}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-navy mb-2 group-hover:text-orange transition-colors leading-snug">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-navy-soft/75 leading-relaxed mb-3 line-clamp-3">{article.excerpt}</p>
+                    <div className="text-xs text-navy-soft/55">{article.date}</div>
+                  </div>
+                </Card>
+              </Link>
             </motion.div>
           ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <Button asChild variant="outline" size="lg" className="border-navy/15 text-navy hover:bg-navy hover:text-cream font-semibold h-12 px-7">
-            <Link href="/blog">
-              Voir tous les articles
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>

@@ -50,16 +50,31 @@ export function Translation() {
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
-    // Simuler l'envoi du devis
-    await new Promise((r) => setTimeout(r, 1200))
+    try {
+      // Envoi à l'API qui stocke en base de données
+      const res = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, type: "quote" }),
+      })
 
-    toast({
-      title: "Demande de devis envoyée !",
-      description: `Merci ${data.name || ""}. Nous vous répondons sous 2h ouvrées au ${data.phone || "numéro fourni"}.`,
-    })
+      if (!res.ok) throw new Error("Erreur serveur")
 
-    setSubmitting(false)
-    ;(e.target as HTMLFormElement).reset()
+      toast({
+        title: "Demande de devis envoyée !",
+        description: `Merci ${data.name || ""}. Nous vous répondons sous 2h ouvrées au ${data.phone || "numéro fourni"}.`,
+      })
+
+      ;(e.target as HTMLFormElement).reset()
+    } catch (err) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer ou nous appeler.",
+        variant: "destructive",
+      })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -200,7 +215,7 @@ export function Translation() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <Card className="p-6 sm:p-8 bg-white shadow-card border-navy/8">
+              <Card id="devis-form" className="p-6 sm:p-8 bg-white shadow-card border-navy/8 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-orange/10 text-orange flex items-center justify-center">
                     <FileText className="w-6 h-6" />

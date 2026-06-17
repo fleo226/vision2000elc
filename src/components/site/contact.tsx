@@ -37,15 +37,31 @@ export function Contact() {
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
-    await new Promise((r) => setTimeout(r, 1200))
+    try {
+      // Envoi à l'API qui stocke en base de données
+      const res = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, type: "contact" }),
+      })
 
-    toast({
-      title: "Message envoyé !",
-      description: `Merci ${data.name || ""}. Nous vous recontactons très rapidement.`,
-    })
+      if (!res.ok) throw new Error("Erreur serveur")
 
-    setSubmitting(false)
-    ;(e.target as HTMLFormElement).reset()
+      toast({
+        title: "Message envoyé !",
+        description: `Merci ${data.name || ""}. Nous vous recontactons très rapidement. Votre message a été enregistré (réf. ${(await res.json()).id?.slice(-6) || ""}).`,
+      })
+
+      ;(e.target as HTMLFormElement).reset()
+    } catch (err) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer ou nous appeler directement.",
+        variant: "destructive",
+      })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (

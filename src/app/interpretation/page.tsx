@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site/header"
 import { PageHero } from "@/components/site/page-hero"
 import { Interpretation } from "@/components/site/interpretation"
+import { BrochureDownload } from "@/components/site/brochure-download"
 import { Footer } from "@/components/site/footer"
 import { FloatingActions } from "@/components/site/floating-actions"
 import { HomeCTA } from "@/components/site/home-cta"
@@ -22,6 +23,7 @@ export default function InterpretationPage() {
           breadcrumbs={[{ label: "Interprétation" }]}
         />
         <Interpretation />
+        <BrochureDownload />
         <HomeCTA />
       </main>
       <Footer />

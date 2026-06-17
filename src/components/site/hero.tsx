@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Phone, Star, ShieldCheck, Clock, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLang } from "@/lib/lang-context"
-import { Parallax, MagneticButton } from "./effects"
+import { Parallax, MagneticButton, Particles, Typewriter } from "./effects"
 
 export function Hero() {
   const { t } = useLang()
@@ -18,6 +18,9 @@ export function Hero() {
       <div className="absolute top-20 -left-20 w-72 h-72 bg-orange/15 rounded-full blur-3xl animate-blob" />
       <div className="absolute bottom-10 -right-20 w-96 h-96 bg-emerald/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
       <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gold/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
+
+      {/* Particules flottantes */}
+      <Particles count={25} />
 
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -53,7 +56,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-6 text-base sm:text-lg lg:text-xl text-navy-soft/80 max-w-2xl leading-relaxed"
             >
-              {t("hero.subtitle")}
+              <Typewriter text={t("hero.subtitle")} speed={25} delay={800} />
             </motion.p>
 
             {/* CTAs */}

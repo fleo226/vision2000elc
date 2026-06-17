@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "./services"
+import { useAutoCarousel } from "./effects"
 
 const TESTIMONIALS = [
   {
@@ -44,18 +45,17 @@ const TESTIMONIALS = [
 ]
 
 export function Testimonials() {
-  const [idx, setIdx] = useState(0)
-  const [direction, setDirection] = useState(0)
-
-  const go = (dir: number) => {
-    setDirection(dir)
-    setIdx((prev) => (prev + dir + TESTIMONIALS.length) % TESTIMONIALS.length)
-  }
+  const { idx, direction, paused, setPaused, go, goTo } = useAutoCarousel(TESTIMONIALS.length, 6000)
 
   const current = TESTIMONIALS[idx]
 
   return (
-    <section id="temoignages" className="relative py-20 lg:py-28 bg-cream">
+    <section
+      id="temoignages"
+      className="relative py-20 lg:py-28 bg-cream"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="absolute inset-0 pattern-dots opacity-50" />
       <div className="relative container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -117,8 +117,7 @@ export function Testimonials() {
                 <button
                   key={i}
                   onClick={() => {
-                    setDirection(i > idx ? 1 : -1)
-                    setIdx(i)
+                    goTo(i)
                   }}
                   className={`h-2.5 rounded-full transition-all ${
                     i === idx ? "w-8 bg-orange" : "w-2.5 bg-navy/15 hover:bg-navy/30"

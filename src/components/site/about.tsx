@@ -5,13 +5,14 @@ import { motion } from "framer-motion"
 import { Target, Eye, Heart, ArrowRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionHeading } from "./services"
+import { FlipCard } from "./effects"
 
 const VALUES = [
-  { title: "Excellence", desc: "Chaque mission est traitée avec la plus haute exigence qualité, du premier mot au dernier.", color: "orange" },
-  { title: "Professionnalisme", desc: "Ponctualité, discrétion, méthodologie éprouvée. Le sérieux d'un partenaire de confiance.", color: "navy" },
-  { title: "Intégrité", desc: "Engagement transparent sur les délais, les tarifs et la qualité livrée. Pas de promesse en l'air.", color: "emerald" },
-  { title: "Confidentialité", desc: "Vos documents et informations sont protégés. NDA disponible pour chaque mission sensible.", color: "crimson" },
-  { title: "Satisfaction client", desc: "Notre réputation s'est bâtie sur le bouche-à-oreille. Votre succès est le nôtre.", color: "gold" },
+  { title: "Excellence", desc: "Chaque mission est traitée avec la plus haute exigence qualité, du premier mot au dernier.", color: "orange", back: "Notre obsession : zéro faute, zéro approximation. Chaque traduction est relue, chaque formation est suivie." },
+  { title: "Professionnalisme", desc: "Ponctualité, discrétion, méthodologie éprouvée. Le sérieux d'un partenaire de confiance.", color: "navy", back: "Nous signons un engagement de confidentialité. Nous respectons les délais à la lettre. Nous tenons nos promesses." },
+  { title: "Intégrité", desc: "Engagement transparent sur les délais, les tarifs et la qualité livrée. Pas de promesse en l'air.", color: "emerald", back: "Si nous ne pouvons pas faire, nous le disons. Si nous pouvons faire mieux, nous le proposons. Transparence totale." },
+  { title: "Confidentialité", desc: "Vos documents et informations sont protégés. NDA disponible pour chaque mission sensible.", color: "crimson", back: "Vos contrats, vos rapports, vos stratégies ne quittent jamais notre cercle de linguistes. Sécurité absolue." },
+  { title: "Satisfaction client", desc: "Notre réputation s'est bâtie sur le bouche-à-oreille. Votre succès est le nôtre.", color: "gold", back: "80% de nos clients renouvellent leurs missions avec nous. C'est notre meilleure publicité depuis 20 ans." },
 ]
 
 const colorMap: Record<string, string> = {
@@ -146,15 +147,27 @@ export function About() {
 
               <div className="space-y-3">
                 {VALUES.map((v) => (
-                  <div key={v.title} className="flex items-start gap-3 p-3 rounded-xl bg-white border border-navy/5 hover:border-orange/20 transition-colors">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-display font-extrabold text-xs shrink-0 border ${colorMap[v.color]}`}>
-                      ✓
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-navy text-sm">{v.title}</div>
-                      <div className="text-xs text-navy-soft/75 leading-relaxed mt-0.5">{v.desc}</div>
-                    </div>
-                  </div>
+                  <FlipCard
+                    key={v.title}
+                    className="h-24"
+                    front={
+                      <div className="flex items-start gap-3 p-3 rounded-xl bg-white border border-navy/5 h-full">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-display font-extrabold text-xs shrink-0 border ${colorMap[v.color]}`}>
+                          ✓
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-display font-bold text-navy text-sm">{v.title}</div>
+                          <div className="text-xs text-navy-soft/75 leading-relaxed mt-0.5 line-clamp-2">{v.desc}</div>
+                        </div>
+                        <div className="text-[10px] text-navy-soft/40 self-center">↻</div>
+                      </div>
+                    }
+                    back={
+                      <div className={`flex items-center p-3 rounded-xl h-full ${colorMap[v.color].split(" ")[1]} ${colorMap[v.color].split(" ")[0]}`}>
+                        <p className="text-xs font-medium leading-snug">{v.back}</p>
+                      </div>
+                    }
+                  />
                 ))}
               </div>
 

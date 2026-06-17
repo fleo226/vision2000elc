@@ -487,3 +487,342 @@ export function AnimatedCounter({ value, suffix = "", format = "default", durati
     </span>
   )
 }
+
+// ============================================================
+// 11. TYPEWRITER — Texte qui tape tout seul
+// ============================================================
+export function Typewriter({ text, speed = 40, delay = 0, className, cursor = true }: {
+  text: string
+  speed?: number
+  delay?: number
+  className?: string
+  cursor?: boolean
+}) {
+  const [displayed, setDisplayed] = useState("")
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setStarted(true)
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!started) return
+    let i = 0
+    const startTimer = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          setDisplayed(text.slice(0, i + 1))
+          i++
+        } else {
+          clearInterval(interval)
+        }
+      }, speed)
+      return () => clearInterval(interval)
+    }, delay)
+    return () => clearTimeout(startTimer)
+  }, [started, text, speed, delay])
+
+  return (
+    <span ref={ref} className={className}>
+      {displayed}
+      {cursor && started && displayed.length < text.length && (
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+          className="inline-block w-0.5 h-[1em] bg-orange ml-0.5 align-middle"
+        />
+      )}
+    </span>
+  )
+}
+
+// ============================================================
+// 12. SPOTLIGHT TEXT — Couleur qui suit le curseur
+// ============================================================
+export function SpotlightText({ children, className }: { children: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [pos, setPos] = useState({ x: -200, y: -200 })
+
+  const handleMove = (e: React.MouseEvent) => {
+    const el = ref.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+  }
+
+  return (
+    <span
+      ref={ref}
+      onMouseMove={handleMove}
+      className={cn("relative inline-block", className)}
+      style={{
+        backgroundImage: `radial-gradient(circle 100px at ${pos.x}px ${pos.y}px, #F97316, transparent)`,
+        backgroundClip: "text",
+        WebkitBackgroundClip: "text",
+        color: "transparent",
+        WebkitTextFillColor: "transparent",
+      }}
+    >
+      <span className="relative z-0" style={{ color: "#0B1F3A" }}>{children}</span>
+      <span
+        className="absolute inset-0 z-10"
+        style={{
+          backgroundImage: `radial-gradient(circle 100px at ${pos.x}px ${pos.y}px, #F97316, transparent 70%)`,
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        {children}
+      </span>
+    </span>
+  )
+}
+
+// ============================================================
+// 13. FLIP CARD — Carte qui se retourne au survol
+// ============================================================
+export function FlipCard({ front, back, className }: {
+  front: ReactNode
+  back: ReactNode
+  className?: string
+}) {
+  const [flipped, setFlipped] = useState(false)
+
+  return (
+    <div
+      className={cn("group relative h-full [perspective:1200px] cursor-pointer", className)}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      onClick={() => setFlipped(!flipped)}
+      data-cursor="hover"
+    >
+      <motion.div
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full h-full [transform-style:preserve-3d]"
+      >
+        {/* Recto */}
+        <div className="absolute inset-0 [backface-visibility:hidden]">
+          {front}
+        </div>
+        {/* Verso */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          {back}
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+// ============================================================
+// 14. PARTICULES — Particules flottantes en arrière-plan
+// ============================================================
+export function Particles({ count = 30, className }: { count?: number; className?: string }) {
+  const [particles] = useState(() =>
+    Array.from({ length: count }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 10 + 8,
+      delay: Math.random() * 5,
+      color: ["#F97316", "#10B981", "#F59E0B", "#DC2626"][Math.floor(Math.random() * 4)],
+    }))
+  )
+
+  return (
+    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}>
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            opacity: 0.4,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+// ============================================================
+// 15. SHARE BUTTON — Bouton partager flottant
+// ============================================================
+export function ShareButton() {
+  const [open, setOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [pathname, setPathname] = useState(() => {
+    if (typeof window !== "undefined") return window.location.href
+    return ""
+  })
+
+  // Mettre à jour le pathname quand on change de page
+  useEffect(() => {
+    const handler = () => setPathname(window.location.href)
+    window.addEventListener("popstate", handler)
+    return () => window.removeEventListener("popstate", handler)
+  }, [])
+
+  const shareLinks = [
+    {
+      label: "WhatsApp",
+      icon: "💬",
+      href: `https://wa.me/?text=${encodeURIComponent("Découvrez VISION 2000 ELC : " + pathname)}`,
+      color: "bg-emerald hover:bg-emerald/90",
+    },
+    {
+      label: "Facebook",
+      icon: "📘",
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pathname)}`,
+      color: "bg-[#1877F2] hover:bg-[#1877F2]/90",
+    },
+    {
+      label: "LinkedIn",
+      icon: "💼",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pathname)}`,
+      color: "bg-[#0A66C2] hover:bg-[#0A66C2]/90",
+    },
+    {
+      label: "Twitter",
+      icon: "🐦",
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent("VISION 2000 ELC — Centre de formation en anglais à Ouagadougou")}&url=${encodeURIComponent(pathname)}`,
+      color: "bg-[#1DA1F2] hover:bg-[#1DA1F2]/90",
+    },
+  ]
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(pathname)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Copie impossible:", err)
+    }
+  }
+
+  return (
+    <div className="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-2">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="bg-white rounded-2xl shadow-card border border-navy/8 p-3 flex flex-col gap-1.5 min-w-[200px]"
+          >
+            <div className="text-xs font-bold uppercase tracking-wide text-navy-soft/60 px-2 pb-1.5 border-b border-navy/8">
+              Partager cette page
+            </div>
+            {shareLinks.map(link => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-white text-sm font-semibold transition-colors ${link.color}`}
+              >
+                <span className="text-base">{link.icon}</span>
+                {link.label}
+              </a>
+            ))}
+            <button
+              onClick={copyLink}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-navy/5 hover:bg-navy/10 text-navy text-sm font-semibold transition-colors mt-1"
+            >
+              <span className="text-base">{copied ? "✓" : "🔗"}</span>
+              {copied ? "Lien copié !" : "Copier le lien"}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setOpen(!open)}
+        className="w-12 h-12 rounded-full bg-navy text-cream shadow-card flex items-center justify-center hover:bg-navy-soft transition-colors"
+        aria-label="Partager"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+        </svg>
+      </motion.button>
+    </div>
+  )
+}
+
+// ============================================================
+// 16. SECTION REVEAL — Révélation cinématographique au scroll
+// ============================================================
+export function SectionReveal({ children, className, bg }: { children: ReactNode; className?: string; bg?: string }) {
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(className)}
+      style={bg ? { backgroundColor: bg } : undefined}
+    >
+      {children}
+    </motion.section>
+  )
+}
+
+// ============================================================
+// 17. AUTO CAROUSEL — Carousel automatique avec pause au survol
+// ============================================================
+export function useAutoCarousel(length: number, interval = 5000) {
+  const [idx, setIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [direction, setDirection] = useState(0)
+
+  useEffect(() => {
+    if (paused || length <= 1) return
+    const timer = setInterval(() => {
+      setDirection(1)
+      setIdx(prev => (prev + 1) % length)
+    }, interval)
+    return () => clearInterval(timer)
+  }, [paused, length, interval])
+
+  const go = (dir: number) => {
+    setDirection(dir)
+    setIdx(prev => (prev + dir + length) % length)
+  }
+
+  const goTo = (i: number) => {
+    setDirection(i > idx ? 1 : -1)
+    setIdx(i)
+  }
+
+  return { idx, direction, paused, setPaused, go, goTo }
+}

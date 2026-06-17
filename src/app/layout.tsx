@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import { LangProvider } from "@/lib/lang-context"
-import { Loader, CustomCursor, ScrollProgress, RouteChangeOverlay } from "@/components/site/effects"
+import { Loader, CustomCursor, ScrollProgress, RouteChangeOverlay, ShareButton } from "@/components/site/effects"
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -240,6 +240,7 @@ export default function RootLayout({
           <CustomCursor />
           <ScrollProgress />
           <RouteChangeOverlay />
+          <ShareButton />
           {children}
           <Toaster />
         </LangProvider>

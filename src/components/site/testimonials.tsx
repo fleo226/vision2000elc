@@ -9,47 +9,65 @@ import { useLang } from "@/lib/lang-context"
 
 const TESTIMONIALS = [
   {
-    quote: "Grâce à VISION 2000 ELC, notre personnel a considérablement amélioré son niveau d'anglais professionnel. Les formations sont concrètes, adaptées à notre secteur bancaire, et les résultats sont mesurables. Nous recommandons vivement.",
-    author: "Directrice des Ressources Humaines",
-    org: "Banque de premier plan, Ouagadougou",
+    quoteFr: "Grâce à VISION 2000 ELC, notre personnel a considérablement amélioré son niveau d'anglais professionnel. Les formations sont concrètes, adaptées à notre secteur bancaire, et les résultats sont mesurables. Nous recommandons vivement.",
+    quoteEn: "Thanks to VISION 2000 ELC, our staff has significantly improved their professional English level. The training is concrete, tailored to our banking sector, and the results are measurable. We highly recommend them.",
+    authorFr: "Directrice des Ressources Humaines",
+    authorEn: "Human Resources Director",
+    orgFr: "Banque de premier plan, Ouagadougou",
+    orgEn: "Leading Bank, Ouagadougou",
     initials: "DR",
     color: "bg-orange",
   },
   {
-    quote: "Service d'interprétation remarquable lors de notre conférence internationale sur le développement. Équipe ponctuelle, professionnelle, parfaitement équipée. Nos invités anglophones se sont sentis pleinement inclus.",
-    author: "Coordonnateur de programme",
-    org: "ONG internationale de développement",
+    quoteFr: "Service d'interprétation remarquable lors de notre conférence internationale sur le développement. Équipe ponctuelle, professionnelle, parfaitement équipée. Nos invités anglophones se sont sentis pleinement inclus.",
+    quoteEn: "Remarkable interpreting service during our international development conference. Punctual, professional, perfectly equipped team. Our English-speaking guests felt fully included.",
+    authorFr: "Coordonnateur de programme",
+    authorEn: "Program Coordinator",
+    orgFr: "ONG internationale de développement",
+    orgEn: "International Development NGO",
     initials: "CP",
     color: "bg-emerald",
   },
   {
-    quote: "Des traductions précises, livrées dans les délais, et un interlocuteur toujours disponible. Nous avons confié à VISION 2000 ELC la traduction de tous nos rapports bailleurs depuis 3 ans, sans une seule déception.",
-    author: "Responsable Communication",
-    org: "Projet de développement rural",
+    quoteFr: "Des traductions précises, livrées dans les délais, et un interlocuteur toujours disponible. Nous avons confié à VISION 2000 ELC la traduction de tous nos rapports bailleurs depuis 3 ans, sans une seule déception.",
+    quoteEn: "Accurate translations, delivered on time, with an always-available contact. We have entrusted VISION 2000 ELC with translating all our donor reports for 3 years, without a single disappointment.",
+    authorFr: "Responsable Communication",
+    authorEn: "Communications Manager",
+    orgFr: "Projet de développement rural",
+    orgEn: "Rural Development Project",
     initials: "RC",
     color: "bg-crimson",
   },
   {
-    quote: "J'ai préparé mon TOEIC en cours particuliers avec VISION 2000 ELC. Score obtenu : 845. Cette formation a véritablement accéléré ma carrière en m'ouvrant les portes d'une entreprise internationale.",
-    author: "Cadre supérieur",
-    org: "Secteur télécommunications",
+    quoteFr: "J'ai préparé mon TOEIC en cours particuliers avec VISION 2000 ELC. Score obtenu : 845. Cette formation a véritablement accéléré ma carrière en m'ouvrant les portes d'une entreprise internationale.",
+    quoteEn: "I prepared for my TOEIC with private tutoring at VISION 2000 ELC. Score achieved: 845. This training truly accelerated my career by opening doors to an international company.",
+    authorFr: "Cadre supérieur",
+    authorEn: "Senior Executive",
+    orgFr: "Secteur télécommunications",
+    orgEn: "Telecommunications Sector",
     initials: "CS",
     color: "bg-gold",
   },
   {
-    quote: "L'équipe a accompagné notre délégation ministérielle lors d'un sommet régional. Discrétion, professionnalisme et précision : tout était parfait. Nous recontracterons sans hésiter.",
-    author: "Chef de cabinet",
-    org: "Ministère, Burkina Faso",
+    quoteFr: "L'équipe a accompagné notre délégation ministérielle lors d'un sommet régional. Discrétion, professionnalisme et précision : tout était parfait. Nous recontracterons sans hésiter.",
+    quoteEn: "The team accompanied our ministerial delegation during a regional summit. Discretion, professionalism and precision: everything was perfect. We will contract again without hesitation.",
+    authorFr: "Chef de cabinet",
+    authorEn: "Chief of Staff",
+    orgFr: "Ministère, Burkina Faso",
+    orgEn: "Ministry, Burkina Faso",
     initials: "CC",
     color: "bg-navy",
   },
 ]
 
 export function Testimonials() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const { idx, direction, paused, setPaused, go, goTo } = useAutoCarousel(TESTIMONIALS.length, 6000)
 
   const current = TESTIMONIALS[idx]
+  const quote = lang === "en" ? current.quoteEn : current.quoteFr
+  const author = lang === "en" ? current.authorEn : current.authorFr
+  const org = lang === "en" ? current.orgEn : current.orgFr
 
   return (
     <section
@@ -88,7 +106,7 @@ export function Testimonials() {
                 </div>
 
                 <blockquote className="font-display text-lg sm:text-xl lg:text-2xl text-navy leading-relaxed font-medium mb-6">
-                  « {current.quote} »
+                  « {quote} »
                 </blockquote>
 
                 <div className="flex items-center gap-4 pt-6 border-t border-navy/8">
@@ -96,8 +114,8 @@ export function Testimonials() {
                     {current.initials}
                   </div>
                   <div>
-                    <div className="font-semibold text-navy">{current.author}</div>
-                    <div className="text-sm text-navy-soft/70">{current.org}</div>
+                    <div className="font-semibold text-navy">{author}</div>
+                    <div className="text-sm text-navy-soft/70">{org}</div>
                   </div>
                 </div>
               </motion.div>

@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react"
 import { MessageCircle, X, ArrowUp } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLang } from "@/lib/lang-context"
 
 export function FloatingActions() {
   const [open, setOpen] = useState(false)
   const [showTop, setShowTop] = useState(false)
+  const { t } = useLang()
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 800)
@@ -42,8 +44,8 @@ export function FloatingActions() {
                   <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald border-2 border-white" />
                 </div>
                 <div>
-                  <div className="font-display font-bold text-sm">VISION 2000 ELC</div>
-                  <div className="text-xs text-white/80">Répond en quelques minutes</div>
+                  <div className="font-display font-bold text-sm">{t("floating.whatsapp.title")}</div>
+                  <div className="text-xs text-white/80">{t("floating.whatsapp.status")}</div>
                 </div>
               </div>
               <button onClick={() => setOpen(false)} aria-label="Fermer" className="text-white/80 hover:text-white">
@@ -52,9 +54,7 @@ export function FloatingActions() {
             </div>
             <div className="p-4 bg-cream-warm">
               <div className="bg-white rounded-2xl rounded-tl-sm p-3 shadow-soft text-sm text-navy max-w-[85%]">
-                👋 Bonjour ! Je suis l'équipe de VISION 2000 ELC.
-                <br /><br />
-                Comment pouvons-nous vous aider aujourd'hui ? Traduction, formation, interprétation ?
+                {t("floating.whatsapp.msg")}
               </div>
               <div className="text-[10px] text-navy-soft/50 text-right mt-1">à l'instant</div>
             </div>
@@ -66,7 +66,7 @@ export function FloatingActions() {
                 className="flex items-center justify-center gap-2 w-full bg-emerald hover:bg-emerald/90 text-white font-semibold py-3 rounded-xl transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
-                Ouvrir la conversation
+                {t("floating.whatsapp.open")}
               </a>
             </div>
           </div>
